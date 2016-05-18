@@ -1,0 +1,29 @@
+schema {
+  query: Query
+}
+
+type Content {
+  path: String!
+  title: String!
+  content: String!
+  component: String!
+}
+
+type NewsItem {
+  title: String!
+  link: String!
+  author: String
+  publishedDate: String!
+  contentSnippet: String
+}
+
+type Query {
+  me: User
+  content(path: String!): Content
+  news: [NewsItem]
+}
+
+type User {
+  id: ID!
+  email: String
+}

@@ -7,16 +7,16 @@ import Relay, {
 } from 'react-relay';
 
 Relay.injectNetworkLayer(
-    new DefaultNetworkLayer('http://localhost:3001/graphql')
+    new DefaultNetworkLayer('http://192.168.1.131:3001/graphql')
 );
 
 export default class App extends Component {
-    render(): void {
-        return (
-            <RootContainer
-                Component={Home}
-                route={new HomeRoute({status: 'any'})}
-            />
-        );
-    }
+  render():void {
+    return (
+      <RootContainer
+        Component={Home}
+        route={new HomeRoute({status: 'any'})}
+      />
+    );
+  }
 }
