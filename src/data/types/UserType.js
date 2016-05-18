@@ -14,11 +14,16 @@ import {
   GraphQLNonNull as NonNull,
 } from 'graphql';
 
+import content from '../queries/content';
+import news from '../queries/news';
+
 const UserType = new ObjectType({
   name: 'User',
   fields: {
     id: { type: new NonNull(ID) },
     email: { type: StringType },
+    content,
+    news,
   },
 });
 

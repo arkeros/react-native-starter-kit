@@ -1,52 +1,11 @@
 import Relay from 'react-relay';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-
-class Home extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this._handleStatusChange = this._handleStatusChange.bind(this);
-  }
-
-  _handleStatusChange(status) {
-    this.props.relay.setVariables({status});
-  }
-
-  render() {
-    // alert(JSON.stringify(this.props.me));
-    return (
-      <View style={styles.container}>
-        <Text style={styles.header}>NEWS: { this.props.me.news[0].title } </Text>
-        <View style={styles.actionList}>
-
-        </View>
-
-      </View>
-    );
-  }
-}
-
-export default Relay.createContainer(Home, {
-  initialVariables: {
-    status: 'any',
-  },
-  fragments: {
-    me: variables => Relay.QL`
-        fragment on User {
-          news {
-            title
-            link
-            contentSnippet
-          }
-        }
-      `,
-  },
-});
 
 const styles = StyleSheet.create({
   actionList: {
@@ -81,5 +40,46 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.03,
     shadowRadius: 1,
+  },
+});
+
+class Home extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this._handleStatusChange = this._handleStatusChange.bind(this);
+  }
+
+  _handleStatusChange(status) {
+    this.props.relay.setVariables({ status });
+  }
+
+  render() {
+    // alert(JSON.stringify(this.props.me));
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>NEWS: { this.props.me.news[0].title } </Text>
+        <View style={styles.actionList}>
+
+        </View>
+
+      </View>
+    );
+  }
+}
+
+export default Relay.createContainer(Home, {
+  initialVariables: {
+    status: 'any',
+  },
+  fragments: {
+    me: variables => Relay.QL`
+        fragment on User {
+          news {
+            title
+            link
+            contentSnippet
+          }
+        }
+      `,
   },
 });

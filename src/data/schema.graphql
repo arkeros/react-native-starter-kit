@@ -26,4 +26,6 @@ type Query {
 type User {
   id: ID!
   email: String
+  content(path: String!): Content
+  news: [NewsItem]
 }

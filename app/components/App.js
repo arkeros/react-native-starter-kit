@@ -1,13 +1,13 @@
 import Home from './Home';
 import HomeRoute from '../routes/HomeRoute';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Relay, {
-    DefaultNetworkLayer,
-    RootContainer,
+  DefaultNetworkLayer,
+  RootContainer,
 } from 'react-relay';
 
 Relay.injectNetworkLayer(
-    new DefaultNetworkLayer('http://192.168.1.131:3001/graphql')
+  new DefaultNetworkLayer('http://192.168.1.131:3001/graphql')
 );
 
 export default class App extends Component {
@@ -15,7 +15,7 @@ export default class App extends Component {
     return (
       <RootContainer
         Component={Home}
-        route={new HomeRoute({status: 'any'})}
+        route={new HomeRoute({ status: 'any' })}
       />
     );
   }

@@ -7,7 +7,7 @@
 import {
     AppRegistry,
 } from 'react-native';
-import App from './components/App';
+import App from './app/components/App';
 
 console.ignoredYellowBox = [
     // FIXME: https://github.com/facebook/react-native/issues/1501

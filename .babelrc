@@ -27,7 +27,8 @@
         "./plugins/babelRelayPlugin"
       ],
       "presets": [
-        "es2015",
+        "react",
+        "node5",
         "stage-0"
       ]
     }

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "fetch",
+  "name": "rsk-fetch",
   "main": "./fetch.server.js",
   "browser": "./fetch.client.js"
 }
