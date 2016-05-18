@@ -7,7 +7,7 @@ import Relay, {
 } from 'react-relay';
 
 Relay.injectNetworkLayer(
-  new DefaultNetworkLayer('http://192.168.1.131:3001/graphql')
+  new DefaultNetworkLayer('http://10.111.69.248:3001/graphql')
 );
 
 export default class App extends Component {
