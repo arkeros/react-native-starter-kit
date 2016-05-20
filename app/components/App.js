@@ -6,6 +6,7 @@ import Relay, {
   DefaultNetworkLayer,
   RootContainer,
 } from 'react-relay';
+import { apiUrl } from '../../src/config';
 
 export default class App extends Component {
   constructor(props, context) {
@@ -17,7 +18,7 @@ export default class App extends Component {
   }
 
   async login({ username, password }) {
-    const response = await fetch('http://192.168.1.128:3001/login', {
+    const response = await fetch(`${apiUrl}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -31,7 +32,7 @@ export default class App extends Component {
     if (response.ok) {
       const { token, user } = await response.json();
       Relay.injectNetworkLayer(
-        new DefaultNetworkLayer('http://192.168.1.128:3001/graphql', {
+        new DefaultNetworkLayer(`${apiUrl}/graphql`, {
           headers: {
             Authorization: `JWT ${token}`,
           },
