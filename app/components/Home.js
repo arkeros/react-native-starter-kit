@@ -114,6 +114,7 @@ export default Relay.createContainer(Home, {
   fragments: {
     me: () => Relay.QL`
         fragment on User {
+          email
           news {
             title
             link

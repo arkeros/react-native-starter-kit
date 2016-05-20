@@ -14,9 +14,33 @@
  */
 
 import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { User, UserLogin, UserClaim, UserProfile } from '../data/models';
 import { auth as config } from '../config';
+
+/**
+ * Sign in with password.
+ */
+passport.use(new LocalStrategy({
+  usernameField: 'usernameOrEmail',
+  passReqToCallback: true,
+  session: false,
+},
+  async (req, email, password, done) => {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return done(null);
+    }
+    if (user.verifyPassword(password)) {
+      return done(null, {
+        id: user.id,
+        email: user.email,
+      });
+    }
+    return done(null);
+  }
+));
 
 /**
  * Sign in with Facebook.

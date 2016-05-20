@@ -35,7 +35,10 @@ User.hasOne(UserProfile, {
 });
 
 function sync(...args) {
-  return sequelize.sync(...args);
+  return sequelize.sync(...args).then(() => User.create({
+    email: 'rafael@arque.ro',
+    password: 'admin1234',
+  }));
 }
 
 export default { sync };

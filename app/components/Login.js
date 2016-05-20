@@ -1,4 +1,3 @@
-import Relay from 'react-relay';
 import React, { Component } from 'react';
 import {
   Image,
@@ -9,8 +8,6 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-
-import logo from '../images/logo.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,23 +65,18 @@ class Login extends Component {
       username: '',
       password: '',
     };
-    this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleStatusChange(status) {
-    this.props.relay.setVariables({ status });
-  }
-
   handleSubmit() {
-    alert(this.state.username);
+    this.props.login(this.state);
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image style={styles.logo} source={logo} />
+          <Image style={styles.logo} source={require('../images/logo.png')} />
         </View>
         <View style={styles.form}>
           <TextInput
@@ -115,20 +107,5 @@ class Login extends Component {
   }
 }
 
-export default Relay.createContainer(Login, {
-  initialVariables: {
-    status: 'any',
-  },
-  fragments: {
-    me: () => Relay.QL`
-        fragment on User {
-          news {
-            title
-            link
-            contentSnippet
-          }
-        }
-      `,
-  },
-});
+export default Login;
 

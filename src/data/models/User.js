@@ -7,8 +7,11 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import scrypt from 'scrypt';
 import DataType from 'sequelize';
 import Model from '../sequelize';
+
+const scryptParameters = scrypt.paramsSync(0.1);
 
 const User = Model.define('User', {
 
@@ -28,7 +31,33 @@ const User = Model.define('User', {
     defaultValue: false,
   },
 
+  password_hash: {
+    type: DataType.STRING(256),
+  },
+
+  password: {
+    type: DataType.STRING,
+    set(password) {
+      this.setDataValue('password', password);
+      const kdf = scrypt.kdfSync(password, scryptParameters);
+      this.setDataValue('password_hash', kdf);
+    },
+    validate: {
+      isLongEnough(password) {
+        if (password.length < 8) {
+          throw new Error('Please choose a longer password');
+        }
+      },
+    },
+  },
+
 }, {
+
+  instanceMethods: {
+    verifyPassword(password) {
+      return scrypt.verifyKdfSync(this.password_hash, password);
+    },
+  },
 
   indexes: [
     { fields: ['email'] },
