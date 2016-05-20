@@ -9,7 +9,6 @@ import {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#373277',
-    //flex: 1,
     justifyContent: 'center',
     paddingVertical: 20,
   },
@@ -19,7 +18,6 @@ const styles = StyleSheet.create({
     padding: 10,
     fontWeight: '400',
     fontSize: 64,
-    //lineHeight: 16,
   },
   desc: {
     alignSelf: 'center',

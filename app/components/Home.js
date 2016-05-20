@@ -22,13 +22,12 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? undefined : 20,
   },
   footer: {
-    //height: 10,
     paddingHorizontal: 15,
   },
   title: {
     fontSize: 18,
     color: '#0074c2',
-    textDecorationLine: "underline",
+    textDecorationLine: 'underline',
   },
   desc: {
     color: '#222',
@@ -66,11 +65,7 @@ class Home extends Component {
       listScrollEnabled: true,
       newsDataSource: _newsDataSource.cloneWithRows(news),
     };
-    this._handleStatusChange = this._handleStatusChange.bind(this);
-  }
-
-  _handleStatusChange(status) {
-    this.props.relay.setVariables({ status });
+    this.handleStatusChange = this.handleStatusChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,11 +77,15 @@ class Home extends Component {
     }
   }
 
+  handleStatusChange(status) {
+    this.props.relay.setVariables({ status });
+  }
+
   renderNewsItem(newsItem) {
     return (
       <View style={styles.news}>
-        <Text style={styles.title}> { newsItem.title } </Text>
-        <Text style={styles.desc}> { newsItem.contentSnippet } </Text>
+        <Text style={styles.title}>{newsItem.title}</Text>
+        <Text style={styles.desc}>{newsItem.contentSnippet}</Text>
       </View>
     );
   }
@@ -103,10 +102,6 @@ class Home extends Component {
           renderRow={this.renderNewsItem}
           renderSeparator={this.renderSeparator}
         />
-        <View style={styles.actionList}>
-
-        </View>
-
       </View>
     );
   }
@@ -117,7 +112,7 @@ export default Relay.createContainer(Home, {
     status: 'any',
   },
   fragments: {
-    me: variables => Relay.QL`
+    me: () => Relay.QL`
         fragment on User {
           news {
             title

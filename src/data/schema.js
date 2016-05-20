@@ -16,7 +16,8 @@ import me from './queries/me';
 import content from './queries/content';
 import news from './queries/news';
 
-import login from './mutations/login';
+import login from './mutations/user.login';
+import logout from './mutations/user.logout';
 
 const schema = new Schema({
   query: new ObjectType({
@@ -31,6 +32,7 @@ const schema = new Schema({
     name: 'Mutation',
     fields: {
       login,
+      // logout
     },
   }),
 });

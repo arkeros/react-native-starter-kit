@@ -1,6 +1,6 @@
 {
   "name": "ReactNativeStarterKit",
-  "version": "0.26.0-rc",
+  "version": "0.26.0",
   "private": true,
   "engines": {
     "node": ">=5.0 <6",
@@ -37,7 +37,7 @@
     "pretty-error": "2.0.0",
     "react": "15.0.2",
     "react-dom": "15.0.2",
-    "react-native": "0.26.0-rc",
+    "react-native": "0.26.0",
     "react-relay": "0.8.1",
     "sequelize": "^3.23.2",
     "source-map-support": "0.4.0",

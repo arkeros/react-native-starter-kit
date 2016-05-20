@@ -5,7 +5,6 @@ import {
 
 import {
   mutationWithClientMutationId,
-  offsetToCursor,
 } from 'graphql-relay';
 
 import { User } from '../models';
@@ -19,13 +18,13 @@ const login = mutationWithClientMutationId({
   },
   outputFields: {
     sessionToken: {
-      type: new NonNull(StringType) ,
+      type: new NonNull(StringType),
       resolve: ({ sessionToken }) => sessionToken,
     },
     me,
   },
-  async mutateAndGetPayload({ email, password}, { request }) {
-    const sessionToken = "jajaja";
+  async mutateAndGetPayload({ email, password }, { request }) {
+    const sessionToken = 'jajaja';
     console.log(JSON.stringify(request.user));
     return { sessionToken };
   },
