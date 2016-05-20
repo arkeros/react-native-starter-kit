@@ -11,7 +11,7 @@ import UserType from '../types/UserType';
 
 const me = {
   type: UserType,
-  resolve({ request }) {
+  resolve(_, args, { request }) {
     // TODO chapuza
     return request.user ? {
       id: request.user.id,

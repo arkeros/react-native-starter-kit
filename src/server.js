@@ -70,10 +70,11 @@ app.get('/login/facebook/return',
 //
 // Register API middleware
 // -----------------------------------------------------------------------------
-app.use('/graphql', expressGraphQL(req => ({
+// TODO verificar que es res
+app.use('/graphql', expressGraphQL((request, res) => ({
   schema,
   graphiql: true,
-  rootValue: { request: req },
+  context: { request, res },
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
