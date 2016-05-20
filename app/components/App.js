@@ -7,14 +7,6 @@ import Relay, {
   RootContainer,
 } from 'react-relay';
 
-Relay.injectNetworkLayer(
-  new DefaultNetworkLayer('http://192.168.1.128:3001/graphql'), {
-    headers: {
-      Authorization: 'Bearer SSdsbCBmaW5kIHNvbWV0aGluZyB0byBwdXQgaGVyZQ==',
-    },
-  }
-);
-
 export default class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -24,10 +16,31 @@ export default class App extends Component {
     this.login = this.login.bind(this);
   }
 
-  login({ username, password }) {
-    // TODO send to the server
-    alert(password);
-    this.setState({ logged: true });
+  async login({ username, password }) {
+    const response = await fetch('http://192.168.1.128:3001/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        usernameOrEmail: username,
+        password,
+      }),
+    });
+    if (response.ok) {
+      const { token, user } = await response.json();
+      Relay.injectNetworkLayer(
+        new DefaultNetworkLayer('http://192.168.1.128:3001/graphql', {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+      );
+      this.setState({ logged: true });
+    } else {
+      alert('Wrong email or password!');
+    }
   }
 
   render():void {

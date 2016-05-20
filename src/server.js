@@ -50,7 +50,7 @@ app.use(expressJwt({
   credentialsRequired: false,
   /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
   getToken(req) {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
       return req.headers.authorization.split(' ')[1];
     } else if (req.cookies && req.cookies.id_token) {
       return req.cookies.id_token;
@@ -62,7 +62,7 @@ app.use(expressJwt({
 app.use(passport.initialize());
 
 app.post('/login',
-  passport.authenticate('local', { session: false, failureRedirect: '/login' }),
+  passport.authenticate('local', { session: false }),
   (req, res) => {
     const expiresIn = 60 * 60 * 24 * 180; // 180 days
     const token = jwt.sign(req.user, auth.jwt.secret, { expiresIn });

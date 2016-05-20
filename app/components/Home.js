@@ -96,6 +96,7 @@ class Home extends Component {
       <View style={styles.container}>
         <Header />
         <Text style={styles.header}>React.js News</Text>
+        <Text style={styles.header}>Hello {this.props.me.email}!</Text>
         <ListView
           dataSource={this.state.newsDataSource}
           initialListSize={this.state.initialListSize}
