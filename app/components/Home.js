@@ -1,11 +1,13 @@
 import Relay from 'react-relay';
 import React, { Component } from 'react';
 import {
+  ListView,
   Platform,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import Header from './Header';
 
 const styles = StyleSheet.create({
   actionList: {
@@ -20,14 +22,22 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? undefined : 20,
   },
   footer: {
-    height: 10,
+    //height: 10,
     paddingHorizontal: 15,
+  },
+  title: {
+    fontSize: 18,
+    color: '#0074c2',
+    textDecorationLine: "underline",
+  },
+  desc: {
+    color: '#222',
   },
   header: {
     alignSelf: 'center',
-    color: 'rgba(175, 47, 47, 0.15)',
+    color: '#222',
     fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
-    fontSize: 100,
+    fontSize: 32,
     fontWeight: '100',
   },
   list: {
@@ -43,9 +53,19 @@ const styles = StyleSheet.create({
   },
 });
 
+const _newsDataSource = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1.__dataID__ !== r2.__dataID__,
+});
+
 class Home extends Component {
   constructor(props, context) {
     super(props, context);
+    const { news } = props.me;
+    this.state = {
+      initialListSize: news.length,
+      listScrollEnabled: true,
+      newsDataSource: _newsDataSource.cloneWithRows(news),
+    };
     this._handleStatusChange = this._handleStatusChange.bind(this);
   }
 
@@ -53,11 +73,36 @@ class Home extends Component {
     this.props.relay.setVariables({ status });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.me.news !== nextProps.me.news) {
+      this.setState({
+        newsDataSource:
+          _newsDataSource.cloneWithRows(nextProps.me.news),
+      });
+    }
+  }
+
+  renderNewsItem(newsItem) {
+    return (
+      <View style={styles.news}>
+        <Text style={styles.title}> { newsItem.title } </Text>
+        <Text style={styles.desc}> { newsItem.contentSnippet } </Text>
+      </View>
+    );
+  }
+
   render() {
     // alert(JSON.stringify(this.props.me));
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>NEWS: { this.props.me.news[0].title } </Text>
+        <Header />
+        <Text style={styles.header}>React.js News</Text>
+        <ListView
+          dataSource={this.state.newsDataSource}
+          initialListSize={this.state.initialListSize}
+          renderRow={this.renderNewsItem}
+          renderSeparator={this.renderSeparator}
+        />
         <View style={styles.actionList}>
 
         </View>
