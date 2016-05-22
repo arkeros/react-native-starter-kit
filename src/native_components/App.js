@@ -1,12 +1,14 @@
 import Home from './Home';
 import Login from './Login';
-import HomeRoute from '../routes/HomeRoute';
-import React, { Component } from 'react';
+import HomeRoute from './routes/Home';
+import React, { 
+  Component,
+} from 'react';
 import Relay, {
   DefaultNetworkLayer,
   RootContainer,
 } from 'react-relay';
-import { apiUrl } from '../../src/config';
+import { apiUrl } from '../config';
 
 export default class App extends Component {
   constructor(props, context) {

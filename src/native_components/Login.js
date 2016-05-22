@@ -76,7 +76,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image style={styles.logo} source={require('../images/logo.png')} />
+          <Image style={styles.logo} source={require('./images/logo.png')} />
         </View>
         <View style={styles.form}>
           <TextInput

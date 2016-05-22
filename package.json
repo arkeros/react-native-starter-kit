@@ -142,7 +142,7 @@
     }
   },
   "scripts": {
-    "eslint": "eslint src app tools",
+    "eslint": "eslint src tools",
     "stylelint": "stylelint \"src/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "mocha \"src/**/*.test.js\" --require test/setup.js --compilers js:babel-register",
