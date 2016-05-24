@@ -89,7 +89,7 @@
     "mkdirp": "^0.5.1",
     "mocha": "^2.4.5",
     "ncp": "^2.0.0",
-    "pixrem": "^3.0.0",
+    "pixrem": "^3.0.1",
     "pleeease-filters": "^3.0.0",
     "postcss": "^5.0.21",
     "postcss-calc": "^5.2.1",
