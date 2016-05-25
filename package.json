@@ -108,7 +108,7 @@
     "react-addons-test-utils": "^15.0.2",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
-    "redbox-react": "^1.2.4",
+    "redbox-react": "^1.2.6",
     "sinon": "^2.0.0-pre",
     "stylelint": "^6.4.1",
     "stylelint-config-standard": "^7.0.0",
