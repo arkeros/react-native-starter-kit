@@ -1,5 +1,8 @@
 import Relay from 'react-relay';
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
 import {
   ListView,
   Platform,
@@ -52,18 +55,28 @@ const styles = StyleSheet.create({
   },
 });
 
-const _newsDataSource = new ListView.DataSource({
+const newsDataSource = new ListView.DataSource({
+  // eslint-disable-next-line no-underscore-dangle
   rowHasChanged: (r1, r2) => r1.__dataID__ !== r2.__dataID__,
 });
 
 class Home extends Component {
+
+  static propTypes = {
+    relay: PropTypes.object,
+    me: PropTypes.shape({
+      news: PropTypes.array,
+      email: PropTypes.string.isRequired,
+    }),
+  };
+
   constructor(props, context) {
     super(props, context);
     const { news } = props.me;
     this.state = {
       initialListSize: news.length,
       listScrollEnabled: true,
-      newsDataSource: _newsDataSource.cloneWithRows(news),
+      newsDataSource: newsDataSource.cloneWithRows(news),
     };
     this.handleStatusChange = this.handleStatusChange.bind(this);
   }
@@ -72,7 +85,7 @@ class Home extends Component {
     if (this.props.me.news !== nextProps.me.news) {
       this.setState({
         newsDataSource:
-          _newsDataSource.cloneWithRows(nextProps.me.news),
+          newsDataSource.cloneWithRows(nextProps.me.news),
       });
     }
   }

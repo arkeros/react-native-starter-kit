@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
 import {
   Image,
   Platform,
@@ -59,6 +62,11 @@ const styles = StyleSheet.create({
 });
 
 class Login extends Component {
+
+  static propTypes = {
+    login: PropTypes.func,
+  };
+
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -73,6 +81,7 @@ class Login extends Component {
   }
 
   render() {
+    /* eslint-disable global-require */
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -104,6 +113,7 @@ class Login extends Component {
         </View>
       </View>
     );
+    /* eslint-enable global-require */
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Platform,
   StyleSheet,
@@ -29,17 +29,16 @@ const styles = StyleSheet.create({
 
 });
 
-class Header extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
+function Header() {
+  return (
+    <View style={styles.container}>
 
-        <Text style={styles.title}>React Native</Text>
-        <Text style={styles.desc}>Complex apps made easy</Text>
+      <Text style={styles.title}>React Native</Text>
+      <Text style={styles.desc}>Complex apps made easy</Text>
 
-      </View>
-    );
-  }
+    </View>
+  );
 }
+
 
 export default Header;

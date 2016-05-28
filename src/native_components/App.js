@@ -1,7 +1,7 @@
 import Home from './Home';
 import Login from './Login';
 import HomeRoute from './routes/Home';
-import React, { 
+import React, {
   Component,
 } from 'react';
 import Relay, {
@@ -32,7 +32,7 @@ export default class App extends Component {
       }),
     });
     if (response.ok) {
-      const { token, user } = await response.json();
+      const { token } = await response.json();
       Relay.injectNetworkLayer(
         new DefaultNetworkLayer(`${apiUrl}/graphql`, {
           headers: {
