@@ -7,7 +7,7 @@
     "npm": ">=3.3 <4"
   },
   "dependencies": {
-    "babel-polyfill": "6.9.0",
+    "babel-polyfill": "6.9.1",
     "babel-relay-plugin": "0.8.1",
     "babel-runtime": "6.9.0",
     "bluebird": "3.4.0",
@@ -139,7 +139,15 @@
     "extends": "stylelint-config-standard",
     "rules": {
       "string-quotes": "single",
-      "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "local"] }]
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": [
+            "global",
+            "local"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
