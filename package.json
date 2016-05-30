@@ -29,7 +29,7 @@
     "isomorphic-style-loader": "1.0.0",
     "jade": "1.11.0",
     "jsonwebtoken": "7.0.0",
-    "markdown-it": "6.0.2",
+    "markdown-it": "6.0.3",
     "node-fetch": "1.5.2",
     "normalize.css": "4.1.1",
     "passport": "0.3.2",
@@ -139,7 +139,15 @@
     "extends": "stylelint-config-standard",
     "rules": {
       "string-quotes": "single",
-      "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "local"] }]
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": [
+            "global",
+            "local"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
