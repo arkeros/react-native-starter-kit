@@ -76,7 +76,7 @@
     "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-loader": "^1.3.0",
-    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.2.2",
     "eslint-plugin-react": "^5.1.1",
     "extend": "^3.0.0",
@@ -139,7 +139,15 @@
     "extends": "stylelint-config-standard",
     "rules": {
       "string-quotes": "single",
-      "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "local"] }]
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": [
+            "global",
+            "local"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
