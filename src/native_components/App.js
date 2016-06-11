@@ -8,6 +8,9 @@ import Relay, {
   DefaultNetworkLayer,
   RootContainer,
 } from 'react-relay';
+import {
+  Alert,
+} from 'react-native';
 import { apiUrl } from '../config';
 
 export default class App extends Component {
@@ -42,7 +45,10 @@ export default class App extends Component {
       );
       this.setState({ logged: true });
     } else {
-      alert('Wrong email or password!');
+      Alert.alert(
+        'Login error',
+        'Wrong email or password!',
+      );
     }
   }
 
