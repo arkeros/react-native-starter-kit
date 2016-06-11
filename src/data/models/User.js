@@ -22,7 +22,7 @@ const User = Model.define('User', {
   },
 
   email: {
-    type: DataType.STRING(256),
+    type: DataType.STRING(255),
     validate: { isEmail: true },
   },
 
