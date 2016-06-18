@@ -154,7 +154,7 @@
     "eslint": "eslint src tools",
     "stylelint": "stylelint \"src/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
-    "test": "mocha \"src/**/*.test.js\" --require test/setup.js --compilers js:babel-register",
+    "test": "BABEL_ENV=server mocha \"src/**/*.test.js\" --require test/setup.js --compilers js:babel-register",
     "test:watch": "npm run test -- --reporter min --watch",
     "update-schema": "BABEL_ENV=server babel-node tools/run updateSchema",
     "clean": "BABEL_ENV=server babel-node tools/run clean",
