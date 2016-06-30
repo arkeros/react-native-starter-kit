@@ -1,6 +1,6 @@
 {
   "name": "ReactNativeStarterKit",
-  "version": "0.26.0",
+  "version": "0.27.2",
   "private": true,
   "engines": {
     "node": ">=5.0 <7",

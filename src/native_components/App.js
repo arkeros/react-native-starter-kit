@@ -1,4 +1,4 @@
-import Home from './Home';
+import Overview from './Overview';
 import Login from './Login';
 import HomeRoute from './routes/Home';
 import React, {
@@ -46,7 +46,7 @@ export default class App extends Component {
       this.setState({ logged: true });
     } else {
       Alert.alert(
-        'Login error',
+        'Overview error',
         'Wrong email or password!',
       );
     }
@@ -61,7 +61,7 @@ export default class App extends Component {
 
     return (
       <RootContainer
-        Component={Home}
+        Component={Overview}
         route={new HomeRoute({ status: 'any' })}
       />
     );

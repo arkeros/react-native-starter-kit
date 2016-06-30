@@ -70,8 +70,8 @@ class Login extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      username: '',
-      password: '',
+      username: 'rafael@arque.ro',
+      password: 'admin1234',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }

@@ -15,7 +15,7 @@ export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`;
 
 export const databaseUrl = process.env.DATABASE_URL || 'sqlite:database.sqlite';
 
-export const apiUrl = process.env.API_URL || 'http://192.168.1.128:3001';
+export const apiUrl = process.env.API_URL || 'http://192.168.1.131:3001';
 
 export const analytics = {
 
