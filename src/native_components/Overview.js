@@ -1,3 +1,4 @@
+import Relay from 'react-relay';
 import React, {
   Component,
   PropTypes,
@@ -45,5 +46,21 @@ class Overview extends Component {
   }
 }
 
-export default Overview;
+export default Relay.createContainer(Overview, {
+  initialVariables: {
+    status: 'any',
+  },
+  fragments: {
+    me: () => Relay.QL`
+        fragment on User {
+          email
+          news {
+            title
+            link
+            contentSnippet
+          }
+        }
+      `,
+  },
+});
 

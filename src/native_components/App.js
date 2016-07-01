@@ -1,4 +1,5 @@
 import Overview from './Overview';
+import Groups from './Groups';
 import Login from './Login';
 import HomeRoute from './routes/Home';
 import React, {
@@ -10,6 +11,8 @@ import Relay, {
 } from 'react-relay';
 import {
   Alert,
+  StatusBar,
+View,
 } from 'react-native';
 import { apiUrl } from '../config';
 
@@ -55,15 +58,27 @@ export default class App extends Component {
   render():void {
     if (!this.state.logged) {
       return (
-        <Login login={this.login} />
+        <View style={{ flex: 1 }}>
+          <StatusBar
+            backgroundColor="blue"
+            barStyle="light-content"
+          />
+          <Login login={this.login} />
+        </View>
       );
     }
 
     return (
-      <RootContainer
-        Component={Overview}
-        route={new HomeRoute({ status: 'any' })}
-      />
+      <View style={{ flex: 1 }}>
+        <StatusBar
+          //backgroundColor="blue"
+          barStyle="light-content"
+        />
+        <RootContainer
+          Component={Groups}
+          route={new HomeRoute({ status: 'any' })}
+        />
+      </View>
     );
   }
 }
