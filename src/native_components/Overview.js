@@ -38,9 +38,7 @@ class Overview extends Component {
           <Text style={styles.month}>March</Text>
           <Text style={styles.month}>April</Text>
         </View>
-        <View style={styles.months}>
-        </View>
-
+        <View style={styles.months} />
       </View>
     );
   }

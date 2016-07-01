@@ -1,5 +1,6 @@
 import Overview from './Overview';
 import Groups from './Groups';
+import List from './List';
 import Login from './Login';
 import HomeRoute from './routes/Home';
 import React, {
@@ -68,10 +69,11 @@ export default class App extends Component {
       );
     }
 
+    // TODO must be navigator
     return (
       <View style={{ flex: 1 }}>
         <StatusBar
-          //backgroundColor="blue"
+          // backgroundColor="blue"
           barStyle="light-content"
         />
         <RootContainer

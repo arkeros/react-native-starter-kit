@@ -1,44 +1,42 @@
-import React from 'react';
+import React, {
+  PropTypes,
+} from 'react';
 import {
-  Platform,
+  Image,
   StyleSheet,
   Text,
-  View,
 } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#373277',
-    justifyContent: 'center',
-    paddingVertical: 20,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    resizeMode: 'cover',
+    height: 40,
+    paddingLeft: 30,
   },
   title: {
-    textAlign: 'center',
-    color: '#fff',
-    padding: 10,
-    fontWeight: '400',
-    fontSize: 64,
+    color: 'white',
+    fontFamily: 'Avenir Light',
+    fontSize: 38,
+    fontWeight: '200',
+    backgroundColor: 'transparent',
   },
-  desc: {
-    alignSelf: 'center',
-    color: 'rgba(255, 255, 255, 0.5)',
-    fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
-    fontSize: 20,
-    fontWeight: '100',
-  },
-
 });
 
-function Header() {
+function Header({ title, background }) {
   return (
-    <View style={styles.container}>
-
-      <Text style={styles.title}>React Native</Text>
-      <Text style={styles.desc}>Complex apps made easy</Text>
-
-    </View>
+    <Image style={styles.container} source={background}>
+      <Text style={styles.title}>{title}</Text>
+    </Image>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  background: PropTypes.number.isRequired,
+};
 
 
 export default Header;

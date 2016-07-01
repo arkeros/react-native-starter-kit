@@ -3,12 +3,8 @@ import React, {
   PropTypes,
 } from 'react';
 import {
-  Image,
-  Platform,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -17,27 +13,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 30,
-
+    marginRight: 1,
+    marginBottom: 1,
     alignItems: 'center',
   },
   title: {
-    color: 'black',
+    color: '#1d1d26',
     fontFamily: 'Avenir',
-    fontSize: 30,
+    fontSize: 26,
     textAlign: 'center',
+    marginBottom: 5,
   },
   items: {
-    color: 'rgba(29, 29, 38, 0.5)',
-    fontSize: 0.44 * 30,
+    color: '#1d1d26',
+    fontSize: 0.44 * 26,
     fontFamily: 'Avenir',
-    //opacity: 0.5,
     textAlign: 'center',
+    opacity: 0.5,
   },
   category: {
-    backgroundColor: '#50d2c2',
     width: 20,
-    height: 5,
-    marginTop: 20,
+    height: 3,
+    marginTop: 15,
   },
 });
 

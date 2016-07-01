@@ -1,16 +1,12 @@
 import Relay from 'react-relay';
+import Header from '../Header';
 import Group from './Group';
 import React, {
   Component,
   PropTypes,
 } from 'react';
 import {
-  Image,
-  Platform,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -18,27 +14,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
   },
-  header: {
-    //height: 160,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    resizeMode: 'cover',
-    height: 100,
-    paddingLeft: 30,
-  },
-  title: {
-    color: 'white',
-    fontFamily: 'Avenir',
-    fontSize: 42,
-    fontWeight: '200',
-    backgroundColor: 'transparent',
-  },
   grid: {
+    backgroundColor: '#f4f4f4',
     flex: 3,
   },
   row: {
-    backgroundColor: 'gray',
     flex: 1,
     flexDirection: 'row',
   },
@@ -50,16 +30,12 @@ const styles = StyleSheet.create({
 
 class Groups extends Component {
   render() {
-
     return (
       <View style={styles.container}>
-
-        <Image
-          style={styles.header}
-          source={require('./background.jpg')} >
-          <Text style={styles.title}>My Groups</Text>
-        </Image>
-
+        <Header
+          title="My Groups"
+          background={require('./background.jpg')}
+        />
         <View style={styles.grid}>
           <View style={styles.row}>
             <Group style={styles.column} title="Shop" items={25} color="#50d2c2" />
