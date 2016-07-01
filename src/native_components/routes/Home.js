@@ -7,7 +7,7 @@ export default class Home extends Route {
     status: { required: false },
   };
   static queries = {
-    me: () => Relay.QL`query { me }`,
+    viewer: () => Relay.QL`query { viewer }`,
   };
   static routeName = 'Home';
 }

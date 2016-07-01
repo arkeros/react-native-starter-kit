@@ -16,6 +16,7 @@ import {
 
 import content from '../queries/content';
 import news from '../queries/news';
+import todos from '../queries/user.todos';
 
 const UserType = new ObjectType({
   name: 'User',
@@ -24,6 +25,7 @@ const UserType = new ObjectType({
     email: { type: StringType },
     content,
     news,
+    todos,
   },
 });
 

@@ -17,10 +17,33 @@ type NewsItem {
   contentSnippet: String
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
 type Query {
-  me: User
+  viewer: User
   content(path: String!): Content
   news: [NewsItem]
+}
+
+type Todo {
+  id: ID!
+  text: String
+  completed: Boolean
+}
+
+type TodoConnection {
+  pageInfo: PageInfo!
+  edges: [TodoEdge]
+}
+
+type TodoEdge {
+  node: Todo
+  cursor: String!
 }
 
 type User {
@@ -28,4 +51,5 @@ type User {
   email: String
   content(path: String!): Content
   news: [NewsItem]
+  todos(after: String, first: Int, before: String, last: Int): TodoConnection
 }

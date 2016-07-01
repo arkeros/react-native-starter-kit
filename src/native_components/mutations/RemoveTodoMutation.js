@@ -5,16 +5,14 @@ export default class RemoveTodoMutation extends Relay.Mutation {
     // TODO: Mark complete as optional
     todo: () => Relay.QL`
       fragment on Todo {
-        complete,
+        completed,
         id,
       }
     `,
     // TODO: Mark completedCount and totalCount as optional
     viewer: () => Relay.QL`
       fragment on User {
-        completedCount,
         id,
-        totalCount,
       }
     `,
   };
@@ -26,7 +24,6 @@ export default class RemoveTodoMutation extends Relay.Mutation {
       fragment on RemoveTodoPayload {
         deletedTodoId,
         viewer {
-          completedCount,
           totalCount,
         },
       }
@@ -49,7 +46,7 @@ export default class RemoveTodoMutation extends Relay.Mutation {
   getOptimisticResponse() {
     const viewerPayload = {id: this.props.viewer.id};
     if (this.props.viewer.completedCount != null) {
-      viewerPayload.completedCount = this.props.todo.complete === true ?
+      viewerPayload.completedCount = this.props.todo.completed === true ?
       this.props.viewer.completedCount - 1 :
         this.props.viewer.completedCount;
     }

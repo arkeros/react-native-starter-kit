@@ -49,7 +49,7 @@ export default Relay.createContainer(Overview, {
     status: 'any',
   },
   fragments: {
-    me: () => Relay.QL`
+    viewer: () => Relay.QL`
         fragment on User {
           email
           news {

@@ -8,10 +8,13 @@
  */
 
 import sequelize from '../sequelize';
+import Todo from './Todo';
 import User from './User';
 import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
 import UserProfile from './UserProfile';
+
+User.hasMany(Todo, {as: 'todos'})
 
 User.hasMany(UserLogin, {
   foreignKey: 'userId',
@@ -35,11 +38,14 @@ User.hasOne(UserProfile, {
 });
 
 function sync(...args) {
-  return sequelize.sync(...args).then(() => User.create({
-    email: 'rafael@arque.ro',
-    password: 'admin1234',
-  }));
+  return sequelize.sync(...args).then(() => {
+    
+    User.create({
+      email: 'rafael@arque.ro',
+      password: 'admin1234',
+    });
+  });
 }
 
 export default { sync };
-export { User, UserLogin, UserClaim, UserProfile };
+export { Todo, User, UserLogin, UserClaim, UserProfile };
