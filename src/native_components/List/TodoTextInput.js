@@ -18,17 +18,19 @@ export default class TodoTextInput extends Component {
     style: TextInput.propTypes.style,
     value: TextInput.propTypes.value,
   };
-  state = {
-    text: this.props.initialValue || '',
-  };
+
   constructor(props, context) {
     super(props, context);
-    this._commitChanges = this._commitChanges.bind(this);
-    this._handleBlur = this._handleBlur.bind(this);
-    this._handleChangeText = this._handleChangeText.bind(this);
-    this._handleSubmitEditing = this._handleSubmitEditing.bind(this);
+    this.state = {
+      text: this.props.initialValue || '',
+    };
+    this.commitChanges = this.commitChanges.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChangeText = this.handleChangeText.bind(this);
+    this.handleSubmitEditing = this.handleSubmitEditing.bind(this);
   }
-  _commitChanges() {
+
+  commitChanges() {
     const newText = this.state.text.trim();
     if (this.props.onDelete && newText === '') {
       this.props.onDelete();
@@ -36,35 +38,40 @@ export default class TodoTextInput extends Component {
       this.props.onCancel();
     } else if (newText !== '') {
       this.props.onSave(newText);
-      if (this._mounted !== false) {
-        this.setState({text: ''});
+      if (this.mounted !== false) {
+        this.setState({ text: '' });
       }
     }
   }
-  _handleBlur() {
+
+  handleBlur() {
     if (this.props.commitOnBlur) {
-      this._commitChanges();
+      this.commitChanges();
     }
   }
-  _handleChangeText(text) {
-    if (this._mounted !== false) {
-      this.setState({text: text});
+
+  handleChangeText(text) {
+    if (this.mounted !== false) {
+      this.setState({ text });
     }
   }
-  _handleSubmitEditing() {
-    this._commitChanges();
+
+  handleSubmitEditing() {
+    this.commitChanges();
   }
+
   componentWillUnmount() {
-    this._mounted = false;
+    this.mounted = false;
   }
+
   render() {
     return (
       <TextInput
         autoFocus={this.props.autoFocus}
         clearButtonMode={this.props.clearButtonMode}
-        onBlur={this._handleBlur}
-        onChangeText={this._handleChangeText}
-        onSubmitEditing={this._handleSubmitEditing}
+        onBlur={this.handleBlur}
+        onChangeText={this.handleChangeText}
+        onSubmitEditing={this.handleSubmitEditing}
         placeholder={this.props.placeholder}
         style={this.props.style}
         underlineColorAndroid="transparent"

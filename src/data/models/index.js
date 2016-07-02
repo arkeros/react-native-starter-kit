@@ -14,7 +14,7 @@ import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
 import UserProfile from './UserProfile';
 
-User.hasMany(Todo, {as: 'todos'})
+User.hasMany(Todo, { as: 'todos' });
 
 User.hasMany(UserLogin, {
   foreignKey: 'userId',
@@ -39,7 +39,6 @@ User.hasOne(UserProfile, {
 
 function sync(...args) {
   return sequelize.sync(...args).then(async () => {
-
     const admin = await User.create({
       email: 'rafael@arque.ro',
       password: 'admin1234',

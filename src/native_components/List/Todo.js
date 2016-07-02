@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 58,
+
+    backgroundColor: 'white',
   },
   input: {
     flex: 1,
@@ -48,60 +50,69 @@ class Todo extends Component {
     onDestroy: PropTypes.func.isRequired,
     style: View.propTypes.style,
   };
-  state = {
-    isEditing: false,
-  };
+
   constructor(props, context) {
     super(props, context);
-    this._handleCompletePress = this._handleCompletePress.bind(this);
-    this._handleLabelPress = this._handleLabelPress.bind(this);
-    this._handleTextInputCancel = this._handleTextInputCancel.bind(this);
-    this._handleTextInputDelete = this._handleTextInputDelete.bind(this);
-    this._handleTextInputSave = this._handleTextInputSave.bind(this);
-    this._setEditMode = this._setEditMode.bind(this);
+    this.state = {
+      isEditing: false,
+    };
+    this.handleCompletePress = this.handleCompletePress.bind(this);
+    this.handleLabelPress = this.handleLabelPress.bind(this);
+    this.handleTextInputCancel = this.handleTextInputCancel.bind(this);
+    this.handleTextInputDelete = this.handleTextInputDelete.bind(this);
+    this.handleTextInputSave = this.handleTextInputSave.bind(this);
+    this.setEditMode = this.setEditMode.bind(this);
   }
-  _handleCompletePress() {
-    const complete = !this.props.todo.complete;
+
+  handleCompletePress() {
+    const completed = !this.props.todo.completed;
     this.props.relay.commitUpdate(
       new ChangeTodoStatusMutation({
-        complete,
+        completed,
         todo: this.props.todo,
         viewer: this.props.viewer,
       })
     );
   }
-  _handleLabelPress() {
-    this._setEditMode(true);
+
+  handleLabelPress() {
+    this.setEditMode(true);
   }
-  _handleTextInputCancel() {
-    this._setEditMode(false);
+
+  handleTextInputCancel() {
+    this.setEditMode(false);
   }
-  _handleTextInputDelete() {
-    this._setEditMode(false);
+
+  handleTextInputDelete() {
+    this.setEditMode(false);
     this.props.onDestroy();
   }
-  _handleTextInputSave(text) {
-    this._setEditMode(false);
+
+  handleTextInputSave(text) {
+    this.setEditMode(false);
     this.props.relay.commitUpdate(
-      new RenameTodoMutation({todo: this.props.todo, text})
+      new RenameTodoMutation({ todo: this.props.todo, text })
     );
   }
-  _setEditMode(shouldEdit) {
-    this.setState({isEditing: shouldEdit});
+
+  setEditMode(shouldEdit) {
+    this.setState({ isEditing: shouldEdit });
   }
+
   renderCompleteCheckbox() {
-    const imageModule = this.props.todo.complete ?
+    const imageModule = this.props.todo.completed ?
       require('../images/todo_checkbox-active.png') :
       require('../images/todo_checkbox.png');
     return (
       <TouchableHighlight
-        onPress={this._handleCompletePress}
+        onPress={this.handleCompletePress}
         style={styles.checkbox}
         underlayColor="transparent">
         <Image source={imageModule} />
       </TouchableHighlight>
     );
   }
+
   render() {
     return (
       <View style={[this.props.style, styles.container]}>
@@ -111,14 +122,14 @@ class Todo extends Component {
             autoFocus={true}
             commitOnBlur={true}
             initialValue={this.props.todo.text}
-            onCancel={this._handleTextInputCancel}
-            onDelete={this._handleTextInputDelete}
-            onSave={this._handleTextInputSave}
+            onCancel={this.handleTextInputCancel}
+            onDelete={this.handleTextInputDelete}
+            onSave={this.handleTextInputSave}
             style={[styles.labelText, styles.inputText, styles.input]}
           /> :
           <TouchableHighlight
             activeOpacity={1}
-            onPress={this._handleLabelPress}
+            onPress={this.handleLabelPress}
             style={styles.label}
             underlayColor="transparent">
             <Text

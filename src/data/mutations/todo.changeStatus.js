@@ -26,9 +26,9 @@ const changeTodoStatus = mutationWithClientMutationId({
     },
     viewer,
   },
-  mutateAndGetPayload({ id, completed }) {
+  async mutateAndGetPayload({ id, completed }) {
     const localTodoId = fromGlobalId(id).id;
-    Todo.update({
+    await Todo.update({
       completed,
     }, {
       where: { id: localTodoId },

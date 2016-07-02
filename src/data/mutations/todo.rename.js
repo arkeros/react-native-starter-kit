@@ -24,9 +24,9 @@ const renameTodo = mutationWithClientMutationId({
       resolve: ({ localTodoId }) => Todo.findById(localTodoId),
     },
   },
-  mutateAndGetPayload({ id, text }) {
+  async mutateAndGetPayload({ id, text }) {
     const localTodoId = fromGlobalId(id).id;
-    Todo.update({
+    await Todo.update({
       text,
     }, {
       where: { id: localTodoId },

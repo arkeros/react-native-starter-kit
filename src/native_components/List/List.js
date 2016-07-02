@@ -9,19 +9,15 @@ import React, {
   PropTypes,
 } from 'react';
 import {
-  Image,
   ListView,
-  Platform,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 2,
+    backgroundColor: 'white',
   },
 });
 
@@ -34,6 +30,7 @@ class List extends Component {
     status: PropTypes.oneOf(['active', 'any', 'completed']).isRequired,
     style: View.propTypes.style,
   };
+
   constructor(props, context) {
     super(props, context);
     const { edges } = props.viewer.todos;
@@ -42,34 +39,24 @@ class List extends Component {
       listScrollEnabled: true,
       todosDataSource: todosDataSource.cloneWithRows(edges),
     };
-    this._handleMarkAllPress = this._handleMarkAllPress.bind(this);
-    this._handleSwipeInactive = this._handleSwipeInactive.bind(this);
-    this._handleTextInputSave = this._handleTextInputSave.bind(this);
-    this._handleTodoDestroy = this._handleTodoDestroy.bind(this);
+    this.handleMarkAllPress = this.handleMarkAllPress.bind(this);
+    this.handleSwipeInactive = this.handleSwipeInactive.bind(this);
+    this.handleTextInputSave = this.handleTextInputSave.bind(this);
+    this.handleTodoDestroy = this.handleTodoDestroy.bind(this);
     this.renderTodoEdge = this.renderTodoEdge.bind(this);
   }
 
-  _handleMarkAllPress() {
-    const numTodos = this.props.viewer.totalCount;
-    const numCompletedTodos = this.props.viewer.completedCount;
-    const completed = numTodos !== numCompletedTodos;
-    this.props.relay.commitUpdate(
-      new MarkAllTodosMutation({
-        completed,
-        todos: this.props.viewer.todos,
-        viewer: this.props.viewer,
-      })
-    );
-  }
-  _handleSwipeInactive(swipeInactive) {
+  handleSwipeInactive(swipeInactive) {
     this.setState({listScrollEnabled: swipeInactive});
   }
-  _handleTextInputSave(text) {
+
+  handleTextInputSave(text) {
     this.props.relay.commitUpdate(
       new AddTodoMutation({text, viewer: this.props.viewer})
     );
   }
-  _handleTodoDestroy(todo) {
+
+  handleTodoDestroy(todo) {
     this.props.relay.commitUpdate(
       new RemoveTodoMutation({
         todo,
@@ -87,8 +74,21 @@ class List extends Component {
     }
   }
 
+  handleMarkAllPress() {
+    const numTodos = this.props.viewer.totalCount;
+    const numCompletedTodos = this.props.viewer.completedCount;
+    const completed = numTodos !== numCompletedTodos;
+    this.props.relay.commitUpdate(
+      new MarkAllTodosMutation({
+        completed,
+        todos: this.props.viewer.todos,
+        viewer: this.props.viewer,
+      })
+    );
+  }
+
   renderTodoEdge(todoEdge) {
-    const destroyHandler = this._handleTodoDestroy.bind(null, todoEdge.node);
+    const destroyHandler = this.handleTodoDestroy.bind(null, todoEdge.node);
     return (
       <Swipeout
         key={todoEdge.node.id}
@@ -97,7 +97,8 @@ class List extends Component {
           type: 'delete',
           onPress: destroyHandler,
         }]}
-        scroll={this._handleSwipeInactive}>
+        scroll={this.handleSwipeInactive}
+      >
         <Todo
           onDestroy={destroyHandler}
           style={styles.todo}
@@ -113,7 +114,6 @@ class List extends Component {
   }
 
   render() {
-
     return (
       <View style={styles.container}>
         <Header
@@ -123,7 +123,7 @@ class List extends Component {
         <ListView
           style={{ flex: 3 }}
           dataSource={this.state.todosDataSource}
-          enableEmptySections={true}
+          enableEmptySections
           initialListSize={this.state.initialListSize}
           renderRow={this.renderTodoEdge}
           renderSeparator={this.renderSeparator}
@@ -137,7 +137,7 @@ export default Relay.createContainer(List, {
   initialVariables: {
     status: 'any',
   },
-  prepareVariables({status}) {
+  prepareVariables({ status }) {
     let nextStatus;
     if (status === 'active' || status === 'completed') {
       nextStatus = status;
