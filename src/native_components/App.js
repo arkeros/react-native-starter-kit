@@ -77,7 +77,7 @@ export default class App extends Component {
           barStyle="light-content"
         />
         <RootContainer
-          Component={Groups}
+          Component={List}
           route={new HomeRoute({ status: 'any' })}
         />
       </View>

@@ -52,7 +52,6 @@ class Group extends Component {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.items}>{items} ITEMS</Text>
         <View style={[styles.category, { backgroundColor }]} />
-
       </View>
     );
   }

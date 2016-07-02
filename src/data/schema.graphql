@@ -1,5 +1,29 @@
 schema {
   query: Query
+  mutation: Mutation
+}
+
+input AddTodoInput {
+  text: String!
+  clientMutationId: String!
+}
+
+type AddTodoPayload {
+  todoEdge: TodoEdge
+  viewer: User
+  clientMutationId: String!
+}
+
+input ChangeTodoStatusInput {
+  id: ID!
+  completed: Boolean!
+  clientMutationId: String!
+}
+
+type ChangeTodoStatusPayload {
+  todo: Todo
+  viewer: User
+  clientMutationId: String!
 }
 
 type Content {
@@ -7,6 +31,12 @@ type Content {
   title: String!
   content: String!
   component: String!
+}
+
+type Mutation {
+  addTodo(input: AddTodoInput!): AddTodoPayload
+  renameTodo(input: RenameTodoInput!): RenameTodoPayload
+  changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
 }
 
 type NewsItem {
@@ -28,6 +58,17 @@ type Query {
   viewer: User
   content(path: String!): Content
   news: [NewsItem]
+}
+
+input RenameTodoInput {
+  id: ID!
+  text: String!
+  clientMutationId: String!
+}
+
+type RenameTodoPayload {
+  todo: Todo
+  clientMutationId: String!
 }
 
 type Todo {

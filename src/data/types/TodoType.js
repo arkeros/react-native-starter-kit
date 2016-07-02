@@ -29,4 +29,4 @@ const {
 });
 
 export const TodosConnection = connectionType;
-export const TodosEdgeType = edgeType;
+export const TodoEdgeType = edgeType;

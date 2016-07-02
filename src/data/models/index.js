@@ -38,12 +38,19 @@ User.hasOne(UserProfile, {
 });
 
 function sync(...args) {
-  return sequelize.sync(...args).then(() => {
-    
-    User.create({
+  return sequelize.sync(...args).then(async () => {
+
+    const admin = await User.create({
       email: 'rafael@arque.ro',
       password: 'admin1234',
     });
+    admin.createTodo({ text: 'Apples' });
+    admin.createTodo({ text: 'Bananas' });
+    admin.createTodo({ text: 'Juice' });
+    admin.createTodo({ text: 'Bread' });
+    admin.createTodo({ text: 'Cheese' });
+    admin.createTodo({ text: 'Milk' });
+    admin.createTodo({ text: 'Yogurt' });
   });
 }
 

@@ -9,9 +9,9 @@ const userTodos = {
   description: 'A user collection of todos',
   type: TodosConnection,
   args: connectionArgs,
-  resolve: (company, args) => connectionFromPromisedArray(
+  resolve: ({ id: UserId }, args) => connectionFromPromisedArray(
     Todo.findAll({
-      where: { UserId: 1 }, // TODO id no hardcodeada !
+      where: { UserId },
     }),
     args
   ),

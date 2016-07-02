@@ -12,6 +12,37 @@ import {
   View,
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  checkbox: {
+    width: 40,
+  },
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    height: 58,
+  },
+  input: {
+    flex: 1,
+  },
+  inputText: {
+    marginHorizontal: Platform.OS === 'android' ? 11 : 15,
+  },
+  label: {
+    borderBottomColor: Platform.OS === 'android' ? 'transparent' : undefined,
+    borderBottomWidth: Platform.OS === 'android' ? 1 : undefined,
+    flex: 1,
+  },
+  labelText: {
+    color: 'rgb(77, 77, 77)',
+    fontFamily: Platform.OS === 'android' ? 'sans-serif-regular' : 'Avenir',
+    fontSize: 24,
+    fontWeight: '300',
+    marginHorizontal: 15,
+    textAlign: 'left',
+  },
+});
+
 class Todo extends Component {
   static propTypes = {
     onDestroy: PropTypes.func.isRequired,
@@ -118,36 +149,5 @@ export default Relay.createContainer(Todo, {
         ${ChangeTodoStatusMutation.getFragment('viewer')}
       }
     `,
-  },
-});
-
-const styles = StyleSheet.create({
-  checkbox: {
-    width: 40,
-  },
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'row',
-    height: 58,
-  },
-  input: {
-    flex: 1,
-  },
-  inputText: {
-    marginHorizontal: Platform.OS === 'android' ? 11 : 15,
-  },
-  label: {
-    borderBottomColor: Platform.OS === 'android' ? 'transparent' : undefined,
-    borderBottomWidth: Platform.OS === 'android' ? 1 : undefined,
-    flex: 1,
-  },
-  labelText: {
-    color: 'rgb(77, 77, 77)',
-    fontFamily: Platform.OS === 'android' ? 'sans-serif-regular' : undefined,
-    fontSize: 24,
-    fontWeight: '300',
-    marginHorizontal: 15,
-    textAlign: 'left',
   },
 });

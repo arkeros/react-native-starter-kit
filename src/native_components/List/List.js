@@ -2,6 +2,7 @@ import AddTodoMutation from '../mutations/AddTodoMutation';
 import Relay from 'react-relay';
 import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
 import Header from '../Header';
+import Swipeout from 'react-native-swipeout';
 import Todo from './Todo';
 import React, {
   Component,
@@ -41,7 +42,40 @@ class List extends Component {
       listScrollEnabled: true,
       todosDataSource: todosDataSource.cloneWithRows(edges),
     };
+    this._handleMarkAllPress = this._handleMarkAllPress.bind(this);
+    this._handleSwipeInactive = this._handleSwipeInactive.bind(this);
+    this._handleTextInputSave = this._handleTextInputSave.bind(this);
+    this._handleTodoDestroy = this._handleTodoDestroy.bind(this);
     this.renderTodoEdge = this.renderTodoEdge.bind(this);
+  }
+
+  _handleMarkAllPress() {
+    const numTodos = this.props.viewer.totalCount;
+    const numCompletedTodos = this.props.viewer.completedCount;
+    const completed = numTodos !== numCompletedTodos;
+    this.props.relay.commitUpdate(
+      new MarkAllTodosMutation({
+        completed,
+        todos: this.props.viewer.todos,
+        viewer: this.props.viewer,
+      })
+    );
+  }
+  _handleSwipeInactive(swipeInactive) {
+    this.setState({listScrollEnabled: swipeInactive});
+  }
+  _handleTextInputSave(text) {
+    this.props.relay.commitUpdate(
+      new AddTodoMutation({text, viewer: this.props.viewer})
+    );
+  }
+  _handleTodoDestroy(todo) {
+    this.props.relay.commitUpdate(
+      new RemoveTodoMutation({
+        todo,
+        viewer: this.props.viewer,
+      })
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,6 +88,7 @@ class List extends Component {
   }
 
   renderTodoEdge(todoEdge) {
+    const destroyHandler = this._handleTodoDestroy.bind(null, todoEdge.node);
     return (
       <Swipeout
         key={todoEdge.node.id}
@@ -86,6 +121,7 @@ class List extends Component {
           background={require('./background.jpg')}
         />
         <ListView
+          style={{ flex: 3 }}
           dataSource={this.state.todosDataSource}
           enableEmptySections={true}
           initialListSize={this.state.initialListSize}
