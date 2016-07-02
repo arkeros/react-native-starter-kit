@@ -23,9 +23,7 @@ export default class RemoveTodoMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on RemoveTodoPayload {
         deletedTodoId,
-        viewer {
-          totalCount,
-        },
+        viewer,
       }
     `;
   }
@@ -44,7 +42,7 @@ export default class RemoveTodoMutation extends Relay.Mutation {
     };
   }
   getOptimisticResponse() {
-    const viewerPayload = {id: this.props.viewer.id};
+    const viewerPayload = { id: this.props.viewer.id };
     if (this.props.viewer.completedCount != null) {
       viewerPayload.completedCount = this.props.todo.completed === true ?
       this.props.viewer.completedCount - 1 :

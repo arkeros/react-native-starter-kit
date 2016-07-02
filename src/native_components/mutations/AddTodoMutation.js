@@ -47,7 +47,7 @@ export default class AddTodoMutation extends Relay.Mutation {
       // get added until the server responds
       todoEdge: {
         node: {
-          complete: false,
+          completed: false,
           text: this.props.text,
         },
       },

@@ -37,6 +37,7 @@ type Mutation {
   addTodo(input: AddTodoInput!): AddTodoPayload
   renameTodo(input: RenameTodoInput!): RenameTodoPayload
   changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
+  removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
 }
 
 type NewsItem {
@@ -58,6 +59,17 @@ type Query {
   viewer: User
   content(path: String!): Content
   news: [NewsItem]
+}
+
+input RemoveTodoInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type RemoveTodoPayload {
+  deletedTodoId: ID
+  viewer: User
+  clientMutationId: String!
 }
 
 input RenameTodoInput {

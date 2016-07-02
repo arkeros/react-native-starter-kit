@@ -19,6 +19,7 @@ import news from './queries/news';
 import addTodo from './mutations/todo.add';
 import renameTodo from './mutations/todo.rename';
 import changeTodoStatus from './mutations/todo.changeStatus';
+import removeTodo from './mutations/todo.remove';
 
 const schema = new Schema({
   query: new ObjectType({
@@ -35,6 +36,7 @@ const schema = new Schema({
       addTodo,
       renameTodo,
       changeTodoStatus,
+      removeTodo,
     },
   }),
 });
