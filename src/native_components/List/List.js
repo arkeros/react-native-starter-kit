@@ -46,13 +46,22 @@ class List extends Component {
     this.renderTodoEdge = this.renderTodoEdge.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.viewer.todos.edges !== nextProps.viewer.todos.edges) {
+      this.setState({
+        todosDataSource:
+          todosDataSource.cloneWithRows(nextProps.viewer.todos.edges),
+      });
+    }
+  }
+
   handleSwipeInactive(swipeInactive) {
-    this.setState({listScrollEnabled: swipeInactive});
+    this.setState({ listScrollEnabled: swipeInactive });
   }
 
   handleTextInputSave(text) {
     this.props.relay.commitUpdate(
-      new AddTodoMutation({text, viewer: this.props.viewer})
+      new AddTodoMutation({ text, viewer: this.props.viewer })
     );
   }
 
@@ -63,15 +72,6 @@ class List extends Component {
         viewer: this.props.viewer,
       })
     );
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.viewer.todos.edges !== nextProps.viewer.todos.edges) {
-      this.setState({
-        todosDataSource:
-          todosDataSource.cloneWithRows(nextProps.viewer.todos.edges),
-      });
-    }
   }
 
   handleMarkAllPress() {

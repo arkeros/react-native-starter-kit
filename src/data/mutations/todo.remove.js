@@ -25,7 +25,6 @@ const removeTodo = mutationWithClientMutationId({
   },
   async mutateAndGetPayload({ id }) {
     const localTodoId = fromGlobalId(id).id;
-    console.log(localTodoId);
     const todo = await Todo.findById(localTodoId);
     await todo.destroy();
     return { id };

@@ -1,15 +1,10 @@
 import Relay from 'react-relay';
 import React, {
   Component,
-  PropTypes,
 } from 'react';
 import {
-  Image,
-  Platform,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -17,7 +12,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#333',
-    paddingTop: Platform.OS === 'android' ? undefined : 20,
   },
   months: {
   },
@@ -29,7 +23,6 @@ const styles = StyleSheet.create({
 
 class Overview extends Component {
   render() {
-
     return (
       <View style={styles.container}>
         <View style={styles.months}>

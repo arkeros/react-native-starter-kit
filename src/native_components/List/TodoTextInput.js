@@ -7,6 +7,7 @@ export default class TodoTextInput extends Component {
   static defaultProps = {
     commitOnBlur: false,
   };
+
   static propTypes = {
     autoFocus: TextInput.propTypes.autoFocus,
     clearButtonMode: TextInput.propTypes.clearButtonMode,
@@ -17,6 +18,7 @@ export default class TodoTextInput extends Component {
     placeholder: TextInput.propTypes.placeholder,
     style: TextInput.propTypes.style,
     value: TextInput.propTypes.value,
+    initialValue: PropTypes.string.isRequired,
   };
 
   constructor(props, context) {
@@ -30,18 +32,8 @@ export default class TodoTextInput extends Component {
     this.handleSubmitEditing = this.handleSubmitEditing.bind(this);
   }
 
-  commitChanges() {
-    const newText = this.state.text.trim();
-    if (this.props.onDelete && newText === '') {
-      this.props.onDelete();
-    } else if (this.props.onCancel && newText === this.props.initialValue) {
-      this.props.onCancel();
-    } else if (newText !== '') {
-      this.props.onSave(newText);
-      if (this.mounted !== false) {
-        this.setState({ text: '' });
-      }
-    }
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   handleBlur() {
@@ -60,8 +52,18 @@ export default class TodoTextInput extends Component {
     this.commitChanges();
   }
 
-  componentWillUnmount() {
-    this.mounted = false;
+  commitChanges() {
+    const newText = this.state.text.trim();
+    if (this.props.onDelete && newText === '') {
+      this.props.onDelete();
+    } else if (this.props.onCancel && newText === this.props.initialValue) {
+      this.props.onCancel();
+    } else if (newText !== '') {
+      this.props.onSave(newText);
+      if (this.mounted !== false) {
+        this.setState({ text: '' });
+      }
+    }
   }
 
   render() {

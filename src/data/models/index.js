@@ -45,10 +45,13 @@ function sync(...args) {
     });
     admin.createTodo({ text: 'Apples' });
     admin.createTodo({ text: 'Bananas' });
+    admin.createTodo({ text: 'Cookies' });
     admin.createTodo({ text: 'Juice' });
     admin.createTodo({ text: 'Bread' });
     admin.createTodo({ text: 'Cheese' });
     admin.createTodo({ text: 'Milk' });
+    admin.createTodo({ text: 'Oranges' });
+    admin.createTodo({ text: 'Water' });
     admin.createTodo({ text: 'Yogurt' });
   });
 }

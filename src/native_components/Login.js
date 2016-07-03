@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
   },
   logo: {
     // backgroundColor: 'white',
-    borderRadius: 128,
     height: 128,
     width: 128,
   },

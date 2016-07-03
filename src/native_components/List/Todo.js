@@ -2,7 +2,10 @@ import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
 import RenameTodoMutation from '../mutations/RenameTodoMutation';
 import Relay from 'react-relay';
 import TodoTextInput from './TodoTextInput';
-import React, { Component, PropTypes } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
 import {
   Image,
   Platform,
@@ -49,6 +52,11 @@ class Todo extends Component {
   static propTypes = {
     onDestroy: PropTypes.func.isRequired,
     style: View.propTypes.style,
+    viewer: React.PropTypes.isRequired,
+    todo: PropTypes.shape({
+      completed: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
   };
 
   constructor(props, context) {
@@ -62,6 +70,10 @@ class Todo extends Component {
     this.handleTextInputDelete = this.handleTextInputDelete.bind(this);
     this.handleTextInputSave = this.handleTextInputSave.bind(this);
     this.setEditMode = this.setEditMode.bind(this);
+  }
+
+  setEditMode(isEditing) {
+    this.setState({ isEditing });
   }
 
   handleCompletePress() {
@@ -95,10 +107,6 @@ class Todo extends Component {
     );
   }
 
-  setEditMode(shouldEdit) {
-    this.setState({ isEditing: shouldEdit });
-  }
-
   renderCompleteCheckbox() {
     const imageModule = this.props.todo.completed ?
       require('../images/todo_checkbox-active.png') :
@@ -107,7 +115,8 @@ class Todo extends Component {
       <TouchableHighlight
         onPress={this.handleCompletePress}
         style={styles.checkbox}
-        underlayColor="transparent">
+        underlayColor="transparent"
+      >
         <Image source={imageModule} />
       </TouchableHighlight>
     );
@@ -119,8 +128,8 @@ class Todo extends Component {
         {this.renderCompleteCheckbox()}
         {this.state.isEditing ?
           <TodoTextInput
-            autoFocus={true}
-            commitOnBlur={true}
+            autoFocus
+            commitOnBlur
             initialValue={this.props.todo.text}
             onCancel={this.handleTextInputCancel}
             onDelete={this.handleTextInputDelete}
@@ -131,10 +140,12 @@ class Todo extends Component {
             activeOpacity={1}
             onPress={this.handleLabelPress}
             style={styles.label}
-            underlayColor="transparent">
+            underlayColor="transparent"
+          >
             <Text
               numberOfLines={1}
-              style={styles.labelText}>
+              style={styles.labelText}
+            >
               {this.props.todo.text}
             </Text>
           </TouchableHighlight>

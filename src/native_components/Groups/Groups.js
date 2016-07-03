@@ -3,7 +3,6 @@ import Header from '../Header';
 import Group from './Group';
 import React, {
   Component,
-  PropTypes,
 } from 'react';
 import {
   StyleSheet,
