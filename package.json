@@ -82,7 +82,7 @@
     "eslint-plugin-react": "^5.2.2",
     "extend": "^3.0.0",
     "file-loader": "^0.8.5",
-    "gaze": "^1.0.0",
+    "gaze": "^1.1.0",
     "git-repository": "^0.1.4",
     "glob": "^7.0.3",
     "jade-loader": "^0.8.0",
