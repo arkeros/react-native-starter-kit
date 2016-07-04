@@ -27,7 +27,7 @@ const todosDataSource = new ListView.DataSource({
 
 class List extends Component {
   static propTypes = {
-    status: PropTypes.oneOf(['active', 'any', 'completed']).isRequired,
+    // group: PropTypes.string.isRequired,
     style: View.propTypes.style,
   };
 
@@ -117,7 +117,7 @@ class List extends Component {
     return (
       <View style={styles.container}>
         <Header
-          title="Shop"
+          title={this.props.relay.variables.group}
           background={require('./background.jpg')}
         />
         <ListView
@@ -135,25 +135,18 @@ class List extends Component {
 
 export default Relay.createContainer(List, {
   initialVariables: {
-    status: 'any',
+    group: 'any',
   },
-  prepareVariables({ status }) {
-    let nextStatus;
-    if (status === 'active' || status === 'completed') {
-      nextStatus = status;
-    } else {
-      // This matches the Backbone example, which displays all todos on an
-      // invalid route.
-      nextStatus = 'any';
-    }
-    return {
-      status: nextStatus,
-    };
+  prepareVariables({ group }) {
+    // let nextGroup = group;
+    // TODO do things with group, like validation
+    return { group };
   },
   fragments: {
     viewer: () => Relay.QL`
       fragment on User {
         todos(
+          group: $group,
           first: 20
         ) {
           edges {

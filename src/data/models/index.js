@@ -8,11 +8,15 @@
  */
 
 import sequelize from '../sequelize';
+import Group from './Group';
 import Todo from './Todo';
 import User from './User';
 import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
 import UserProfile from './UserProfile';
+
+Group.hasMany(Todo, { as: 'todos' });
+//Todo.belongsTo(Group, { as: 'group' })
 
 User.hasMany(Todo, { as: 'todos' });
 
@@ -39,22 +43,36 @@ User.hasOne(UserProfile, {
 
 function sync(...args) {
   return sequelize.sync(...args).then(async () => {
+    // TODO this is a mess! Use joins!!!
     const admin = await User.create({
       email: 'rafael@arque.ro',
       password: 'admin1234',
     });
-    admin.createTodo({ text: 'Apples' });
-    admin.createTodo({ text: 'Bananas' });
-    admin.createTodo({ text: 'Cookies' });
-    admin.createTodo({ text: 'Juice' });
-    admin.createTodo({ text: 'Bread' });
-    admin.createTodo({ text: 'Cheese' });
-    admin.createTodo({ text: 'Milk' });
-    admin.createTodo({ text: 'Oranges' });
-    admin.createTodo({ text: 'Water' });
-    admin.createTodo({ text: 'Yogurt' });
+    const UserId = admin.id;
+
+    const shop = await Group.create({
+      name: 'Shop',
+    });
+
+    shop.createTodo({ text: 'Apples', UserId });
+    shop.createTodo({ text: 'Bananas', UserId });
+    shop.createTodo({ text: 'Cookies', UserId });
+    shop.createTodo({ text: 'Juice', UserId });
+    shop.createTodo({ text: 'Bread', UserId });
+    shop.createTodo({ text: 'Cheese', UserId });
+    shop.createTodo({ text: 'Milk', UserId });
+    shop.createTodo({ text: 'Oranges', UserId });
+    shop.createTodo({ text: 'Water', UserId });
+    shop.createTodo({ text: 'Yogurt', UserId });
+
+    const work = await Group.create({
+      name: 'Work',
+    });
+
+    work.createTodo({ text: 'Hammer', UserId });
+    work.createTodo({ text: 'Wood', UserId });
   });
 }
 
 export default { sync };
-export { Todo, User, UserLogin, UserClaim, UserProfile };
+export { Group, Todo, User, UserLogin, UserClaim, UserProfile };

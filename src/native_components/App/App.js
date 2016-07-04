@@ -1,8 +1,6 @@
-import Overview from './Overview';
-import Groups from './Groups';
-import List from './List';
-import Login from './Login';
-import HomeRoute from './routes/Home';
+import Login from '../Login';
+import Inside from './Inside';
+import HomeRoute from '../routes/Home';
 import React, {
   Component,
 } from 'react';
@@ -13,15 +11,15 @@ import Relay, {
 import {
   Alert,
   StatusBar,
-View,
+  View,
 } from 'react-native';
-import { apiUrl } from '../config';
+import { apiUrl } from '../../config';
 
 export default class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      logged: false,  // TODO rename
+      signedIn: false,
     };
     this.login = this.login.bind(this);
   }
@@ -47,7 +45,7 @@ export default class App extends Component {
           },
         })
       );
-      this.setState({ logged: true });
+      this.setState({ signedIn: true });
     } else {
       Alert.alert(
         'Overview error',
@@ -57,7 +55,7 @@ export default class App extends Component {
   }
 
   render():void {
-    if (!this.state.logged) {
+    if (!this.state.signedIn) {
       return (
         <View style={{ flex: 1 }}>
           <StatusBar
@@ -77,8 +75,8 @@ export default class App extends Component {
           barStyle="light-content"
         />
         <RootContainer
-          Component={List}
-          route={new HomeRoute({ status: 'any' })}
+          Component={Inside}
+          route={new HomeRoute({ group: 'any' })} // TODO do not hardcode!
         />
       </View>
     );

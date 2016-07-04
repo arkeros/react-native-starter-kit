@@ -156,6 +156,16 @@
               "description": "A user collection of todos",
               "args": [
                 {
+                  "name": "group",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"any\""
+                },
+                {
                   "name": "after",
                   "description": null,
                   "type": {

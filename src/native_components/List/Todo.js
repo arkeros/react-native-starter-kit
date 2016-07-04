@@ -52,7 +52,7 @@ class Todo extends Component {
   static propTypes = {
     onDestroy: PropTypes.func.isRequired,
     style: View.propTypes.style,
-    viewer: React.PropTypes.isRequired,
+    viewer: PropTypes.object.isRequired,
     todo: PropTypes.shape({
       completed: PropTypes.bool.isRequired,
       text: PropTypes.string.isRequired,
