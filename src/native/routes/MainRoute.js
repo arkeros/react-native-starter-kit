@@ -2,12 +2,12 @@ import Relay, {
   Route,
 } from 'react-relay';
 
-export default class Home extends Route {
+export default class MainRoute extends Route {
   static paramDefinitions = {
-    group: { required: false },
+    group: { required: true },
   };
   static queries = {
     viewer: () => Relay.QL`query { viewer }`,
   };
-  static routeName = 'Home';
+  static routeName = 'MainRoute';
 }

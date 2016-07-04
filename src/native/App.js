@@ -1,9 +1,11 @@
-import Login from '../Login';
-import Inside from './Inside';
-import HomeRoute from '../routes/Home';
 import React, {
   Component,
 } from 'react';
+// AppState
+import LoginScreen from './login/LoginScreen';
+import Navigator from './Navigator';
+import MainRoute from './routes/MainRoute';
+
 import Relay, {
   DefaultNetworkLayer,
   RootContainer,
@@ -13,7 +15,7 @@ import {
   StatusBar,
   View,
 } from 'react-native';
-import { apiUrl } from '../../config';
+import { apiUrl } from '../config';
 
 export default class App extends Component {
   constructor(props, context) {
@@ -40,6 +42,8 @@ export default class App extends Component {
       const { token } = await response.json();
       Relay.injectNetworkLayer(
         new DefaultNetworkLayer(`${apiUrl}/graphql`, {
+          fetchTimeout: 30000,
+          retryDelays: [5000, 10000],
           headers: {
             Authorization: `JWT ${token}`,
           },
@@ -62,7 +66,7 @@ export default class App extends Component {
             backgroundColor="blue"
             barStyle="light-content"
           />
-          <Login login={this.login} />
+          <LoginScreen login={this.login} />
         </View>
       );
     }
@@ -75,8 +79,8 @@ export default class App extends Component {
           barStyle="light-content"
         />
         <RootContainer
-          Component={Inside}
-          route={new HomeRoute({ group: 'any' })} // TODO do not hardcode!
+          Component={Navigator}
+          route={new MainRoute({ group: 'Shop' })} // TODO do not hardcode!
         />
       </View>
     );

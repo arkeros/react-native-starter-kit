@@ -1,6 +1,5 @@
-import Overview from '../Overview';
-import Groups from '../Groups';
-import List from '../List';
+import Groups from './Groups';
+import List from './List';
 import Relay from 'react-relay';
 import React, {
   Component,
@@ -18,24 +17,13 @@ class Inside extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this.setGroup = this.setGroup.bind(this);
     this.renderScene = this.renderScene.bind(this);
   }
 
-  renderScene(route, navigator) {
-    switch (route.id) {
-      case 'groups':
-        return (
-          <Groups navigator={navigator} viewer={this.props.viewer} />
-        );
-      case 'list':
-        return (
-          <List navigator={navigator} viewer={this.props.viewer} />
-        );
-      default: // TODO chapuza!
-        return (
-          <Groups navigator={navigator} viewer={this.props.viewer} />
-        );
-    }
+  setGroup(group) {
+    alert(group);
+    this.props.relay.setVariables({ group });
   }
 
   render() {
@@ -46,14 +34,31 @@ class Inside extends Component {
       />
     );
   }
+
+  renderScene(route, navigator) {
+    switch (route.id) {
+      case 'groups':
+        return (
+          <Groups navigator={navigator} setGroup={this.setGroup} group={this.props.relay.variables.group} viewer={this.props.viewer} />
+        );
+      case 'list':
+        return (
+          <List navigator={navigator} group={this.props.relay.variables.group} viewer={this.props.viewer} />
+        );
+      default: // TODO chapuza!
+        return (
+          <Groups navigator={navigator} setGroup={this.setGroup} group={this.props.relay.variables.group} viewer={this.props.viewer} />
+        );
+    }
+  }
 }
 
 export default Relay.createContainer(Inside, {
   initialVariables: {
-    group: 'any',
+    group: 'InsideAny',
   },
   fragments: {
-    viewer: variables => Relay.QL`
+    viewer: (variables) => Relay.QL`
       fragment on User {
         id
         email

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Login extends Component {
+class LoginScreen extends Component {
 
   static propTypes = {
     login: PropTypes.func,
@@ -84,7 +84,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image style={styles.logo} source={require('./images/logo.png')} />
+          <Image style={styles.logo} source={require('./../images/logo.png')} />
         </View>
         <View style={styles.form}>
           <TextInput
@@ -116,5 +116,5 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default LoginScreen;
 

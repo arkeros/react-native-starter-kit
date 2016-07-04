@@ -104,5 +104,5 @@ type User {
   email: String
   content(path: String!): Content
   news: [NewsItem]
-  todos(group: String = "any", after: String, first: Int, before: String, last: Int): TodoConnection
+  todos(group: String!, after: String, first: Int, before: String, last: Int): TodoConnection
 }

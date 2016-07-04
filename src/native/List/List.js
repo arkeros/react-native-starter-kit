@@ -1,7 +1,7 @@
 import AddTodoMutation from '../mutations/AddTodoMutation';
 import Relay from 'react-relay';
 import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
-import Header from '../Header';
+import Header from '../common/Header';
 import Swipeout from 'react-native-swipeout';
 import Todo from './Todo';
 import React, {
@@ -27,18 +27,20 @@ const todosDataSource = new ListView.DataSource({
 
 class List extends Component {
   static propTypes = {
-    // group: PropTypes.string.isRequired,
+    group: PropTypes.string.isRequired,
     style: View.propTypes.style,
   };
 
   constructor(props, context) {
     super(props, context);
+    const { viewer, group } = {}
     const { edges } = props.viewer.todos;
     this.state = {
       initialListSize: edges.length,
       listScrollEnabled: true,
       todosDataSource: todosDataSource.cloneWithRows(edges),
     };
+    this.props.relay.setVariables({ group: props.group });
     this.handleMarkAllPress = this.handleMarkAllPress.bind(this);
     this.handleSwipeInactive = this.handleSwipeInactive.bind(this);
     this.handleTextInputSave = this.handleTextInputSave.bind(this);
@@ -136,11 +138,6 @@ class List extends Component {
 export default Relay.createContainer(List, {
   initialVariables: {
     group: 'any',
-  },
-  prepareVariables({ group }) {
-    // let nextGroup = group;
-    // TODO do things with group, like validation
-    return { group };
   },
   fragments: {
     viewer: () => Relay.QL`

@@ -1,5 +1,5 @@
 import Relay from 'react-relay';
-import Header from '../Header';
+import Header from '../common/Header';
 import Group from './Group';
 import React, {
   Component,
@@ -40,9 +40,9 @@ class Groups extends Component {
   }
 
   openList(group) {
-    const { relay, navigator} = this.props;
+    const { relay, navigator, setGroup } = this.props;
+    setGroup(group);
     relay.setVariables({ group });
-    alert(group);
     navigator.push({
       id: 'list',
     });
@@ -57,16 +57,16 @@ class Groups extends Component {
         />
         <View style={styles.grid}>
           <View style={styles.row}>
-            <Group style={styles.column} onPress={() => this.openList('shop')} title="Shop" items={25} color="#50d2c2" />
-            <Group style={styles.column} onPress={() => this.openList('work')} title="Work" items={12} color="#6563a4" />
+            <Group style={styles.column} onPress={() => this.openList('Shop')} title="Shop" items={25} color="#50d2c2" />
+            <Group style={styles.column} onPress={() => this.openList('Work')} title="Work" items={12} color="#6563a4" />
           </View>
           <View style={styles.row}>
-            <Group style={styles.column} onPress={() => this.openList('health')} title="Health" items={3} color="#8c88ff" />
-            <Group style={styles.column} onPress={() => this.openList('travel')} title="Travel" items={8} color="#fcab53" />
+            <Group style={styles.column} onPress={() => this.openList('Health')} title="Health" items={3} color="#8c88ff" />
+            <Group style={styles.column} onPress={() => this.openList('Travel')} title="Travel" items={8} color="#fcab53" />
           </View>
           <View style={styles.row}>
-            <Group style={styles.column} onPress={() => this.openList('bills')} title="Bills" items={16} color="#d667cd" />
-            <Group style={styles.column} onPress={() => this.openList('auto')} title="Auto" items={14} color="#ff3366" />
+            <Group style={styles.column} onPress={() => this.openList('Bills')} title="Bills" items={16} color="#d667cd" />
+            <Group style={styles.column} onPress={() => this.openList('Auto')} title="Auto" items={14} color="#ff3366" />
           </View>
         </View>
       </View>

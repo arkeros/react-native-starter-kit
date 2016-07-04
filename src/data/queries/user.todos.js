@@ -1,5 +1,6 @@
 import {
   GraphQLString as StringType,
+  GraphQLNonNull as NonNull,
 } from 'graphql';
 import {
   connectionArgs,
@@ -13,14 +14,14 @@ const userTodos = {
   type: TodosConnection,
   args: {
     group: {
-      type: StringType,
-      defaultValue: 'any',
+      type: new NonNull(StringType),
     },
     ...connectionArgs,
   },
   async resolve({ id: UserId }, { group: groupName, ...args }) {
     // TODO optimize queries... maybe use JOIN
-    const group = await Group.findOne({ name: groupName });
+    const group = await Group.findOne({ where: { name: groupName }});
+    console.log(groupName);
     return connectionFromPromisedArray(
       Todo.findAll({
         where: { UserId, GroupId: group.id },
