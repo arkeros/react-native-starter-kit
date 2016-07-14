@@ -1,9 +1,3 @@
-import AddTodoMutation from '../mutations/AddTodoMutation';
-import Relay from 'react-relay';
-import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
-import Header from '../common/Header';
-import Swipeout from 'react-native-swipeout';
-import Todo from './Todo';
 import React, {
   Component,
   PropTypes,
@@ -13,6 +7,10 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import Swipeout from 'react-native-swipeout';
+
+import Header from '../Header';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -21,38 +19,37 @@ const styles = StyleSheet.create({
   },
 });
 
-const todosDataSource = new ListView.DataSource({
+const itemsDataSource = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1.__dataID__ !== r2.__dataID__,
 });
 
 class List extends Component {
   static propTypes = {
-    group: PropTypes.string.isRequired,
+    // TODO items: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     style: View.propTypes.style,
   };
 
   constructor(props, context) {
     super(props, context);
-    const { viewer, group } = {}
-    const { edges } = props.viewer.todos;
+    const { edges } = props.items;
     this.state = {
       initialListSize: edges.length,
       listScrollEnabled: true,
-      todosDataSource: todosDataSource.cloneWithRows(edges),
+      itemsDataSource: itemsDataSource.cloneWithRows(edges),
     };
-    this.props.relay.setVariables({ group: props.group });
     this.handleMarkAllPress = this.handleMarkAllPress.bind(this);
     this.handleSwipeInactive = this.handleSwipeInactive.bind(this);
     this.handleTextInputSave = this.handleTextInputSave.bind(this);
     this.handleTodoDestroy = this.handleTodoDestroy.bind(this);
-    this.renderTodoEdge = this.renderTodoEdge.bind(this);
+    this.renderItem = this.renderItem.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.viewer.todos.edges !== nextProps.viewer.todos.edges) {
+    if (this.props.items.edges !== nextProps.items.edges) {
       this.setState({
-        todosDataSource:
-          todosDataSource.cloneWithRows(nextProps.viewer.todos.edges),
+        itemsDataSource:
+          itemsDataSource.cloneWithRows(nextProps.items.edges),
       });
     }
   }
@@ -89,11 +86,11 @@ class List extends Component {
     );
   }
 
-  renderTodoEdge(todoEdge) {
-    const destroyHandler = this.handleTodoDestroy.bind(null, todoEdge.node);
+  renderItem(itemEdge) {
+    const destroyHandler = this.handleTodoDestroy.bind(null, itemEdge.node);
     return (
       <Swipeout
-        key={todoEdge.node.id}
+        key={itemEdge.node.id}
         right={[{
           text: 'Delete',
           type: 'delete',
@@ -101,12 +98,7 @@ class List extends Component {
         }]}
         scroll={this.handleSwipeInactive}
       >
-        <Todo
-          onDestroy={destroyHandler}
-          style={styles.todo}
-          todo={todoEdge.node}
-          viewer={this.props.viewer}
-        />
+        {this.props.renderItem(itemEdge)}
       </Swipeout>
     );
   }
@@ -119,15 +111,15 @@ class List extends Component {
     return (
       <View style={styles.container}>
         <Header
-          title={this.props.relay.variables.group}
+          title={this.props.title}
           background={require('./background.jpg')}
         />
         <ListView
           style={{ flex: 3 }}
-          dataSource={this.state.todosDataSource}
+          dataSource={this.state.itemsDataSource}
           enableEmptySections
           initialListSize={this.state.initialListSize}
-          renderRow={this.renderTodoEdge}
+          renderRow={this.renderItem}
           renderSeparator={this.renderSeparator}
         />
       </View>
@@ -135,29 +127,4 @@ class List extends Component {
   }
 }
 
-export default Relay.createContainer(List, {
-  initialVariables: {
-    group: 'any',
-  },
-  fragments: {
-    viewer: () => Relay.QL`
-      fragment on User {
-        todos(
-          group: $group,
-          first: 20
-        ) {
-          edges {
-            node {
-              id
-              ${RemoveTodoMutation.getFragment('todo')}
-              ${Todo.getFragment('todo')}
-            }
-          }
-        }
-        ${AddTodoMutation.getFragment('viewer')}
-        ${RemoveTodoMutation.getFragment('viewer')}
-        ${Todo.getFragment('viewer')}
-      }
-    `,
-  },
-});
+export default List;

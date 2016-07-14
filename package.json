@@ -7,6 +7,7 @@
     "npm": ">=3.3 <4"
   },
   "dependencies": {
+    "adrenaline": "1.0.1",
     "babel-polyfill": "6.9.1",
     "babel-relay-plugin": "0.9.1",
     "babel-runtime": "6.9.2",
@@ -40,7 +41,10 @@
     "react-dom": "15.1.0",
     "react-native": "0.28.0",
     "react-native-swipeout": "git+https://github.com/magrinj/react-native-swipeout#403d973504b58ede25c137fb31b0eff7e03b0a66",
+    "react-redux": "4.4.5",
     "react-relay": "0.9.1",
+    "redux": "3.5.2",
+    "redux-thunk": "2.1.0",
     "scrypt": "6.0.3",
     "sequelize": "3.23.4",
     "source-map-support": "0.4.1",

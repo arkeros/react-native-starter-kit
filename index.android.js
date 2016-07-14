@@ -6,6 +6,6 @@
 import {
     AppRegistry,
 } from 'react-native';
-import App from './src/native/App';
+import Root from './src/native/Root';
 
-AppRegistry.registerComponent('ReactNativeStarterKit', () => App);
+AppRegistry.registerComponent('ReactNativeStarterKit', () => Root);

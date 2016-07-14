@@ -1,6 +1,5 @@
 import React, {
   Component,
-  PropTypes,
 } from 'react';
 import {
   Image,
@@ -8,9 +7,9 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableHighlight,
   View,
 } from 'react-native';
+import LoginButton from './LoginButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,46 +44,28 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   logo: {
-    // backgroundColor: 'white',
+    borderRadius: 64,
     height: 128,
     width: 128,
-  },
-  submit: {
-    height: 60,
-    backgroundColor: '#61DAFB',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  submitText: {
-    fontSize: 20,
   },
 });
 
 class LoginScreen extends Component {
-
-  static propTypes = {
-    login: PropTypes.func,
-  };
-
   constructor(props, context) {
     super(props, context);
     this.state = {
       username: 'rafael@arque.ro',
       password: 'admin1234',
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit() {
-    this.props.login(this.state);
   }
 
   render() {
+    const { username, password } = this.state;
     /* eslint-disable global-require */
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image style={styles.logo} source={require('./../images/logo.png')} />
+          <Image style={styles.logo} source={require('./images/logo.png')} />
         </View>
         <View style={styles.form}>
           <TextInput
@@ -92,7 +73,7 @@ class LoginScreen extends Component {
             placeholder="Username"
             placeholderTextColor="rgba(255,255,255,0.5)"
             onChangeText={(username) => this.setState({ username })}
-            value={this.state.username}
+            value={username}
           />
           <TextInput
             style={styles.input}
@@ -100,13 +81,11 @@ class LoginScreen extends Component {
             placeholder="Password"
             placeholderTextColor="rgba(255,255,255,0.5)"
             onChangeText={(password) => this.setState({ password })}
-            value={this.state.password}
+            value={password}
           />
           <Text style={styles.forgot}>Forgot Password</Text>
         </View>
-        <TouchableHighlight style={styles.submit} onPress={this.handleSubmit}>
-          <Text style={styles.submitText}>Sign In</Text>
-        </TouchableHighlight>
+        <LoginButton username={username} password={password} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don't have an account? Sign Up</Text>
         </View>

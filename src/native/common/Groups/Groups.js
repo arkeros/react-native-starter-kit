@@ -1,6 +1,3 @@
-import Relay from 'react-relay';
-import Header from '../common/Header';
-import Group from './Group';
 import React, {
   Component,
   PropTypes,
@@ -9,6 +6,10 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+
+import Header from '../Header';
+import Group from './Group';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -40,11 +41,8 @@ class Groups extends Component {
   }
 
   openList(group) {
-    const { relay, navigator, setGroup } = this.props;
-    setGroup(group);
-    relay.setVariables({ group });
-    navigator.push({
-      id: 'list',
+    this.props.navigator.push({
+      list: group,
     });
   }
 
@@ -74,21 +72,4 @@ class Groups extends Component {
   }
 }
 
-export default Relay.createContainer(Groups, {
-  initialVariables: {
-    group: 'any',
-  },
-  fragments: {
-    viewer: () => Relay.QL`
-        fragment on User {
-          email
-          news {
-            title
-            link
-            contentSnippet
-          }
-        }
-      `,
-  },
-});
-
+export default Groups;

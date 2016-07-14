@@ -1,7 +1,3 @@
-import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
-import RenameTodoMutation from '../mutations/RenameTodoMutation';
-import Relay from 'react-relay';
-import TodoTextInput from './TodoTextInput';
 import React, {
   Component,
   PropTypes,
@@ -14,6 +10,12 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import { presenter } from 'adrenaline';
+
+// import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
+// import RenameTodoMutation from '../mutations/RenameTodoMutation';
+import TodoTextInput from './common/List/TodoTextInput';
+
 
 const styles = StyleSheet.create({
   checkbox: {
@@ -109,8 +111,8 @@ class Todo extends Component {
 
   renderCompleteCheckbox() {
     const imageModule = this.props.todo.completed ?
-      require('../images/todo_checkbox-active.png') :
-      require('../images/todo_checkbox.png');
+      require('./common/List/images/todo_checkbox-active.png') :
+      require('./common/List/images/todo_checkbox.png');
     return (
       <TouchableHighlight
         onPress={this.handleCompletePress}
@@ -155,21 +157,33 @@ class Todo extends Component {
   }
 }
 
-export default Relay.createContainer(Todo, {
+export default presenter({
   fragments: {
-    todo: () => Relay.QL`
+    todo: `
       fragment on Todo {
         completed
         id
         text
-        ${ChangeTodoStatusMutation.getFragment('todo')}
-        ${RenameTodoMutation.getFragment('todo')}
-      }
-    `,
-    viewer: () => Relay.QL`
-      fragment on User {
-        ${ChangeTodoStatusMutation.getFragment('viewer')}
       }
     `,
   },
-});
+})(Todo);
+
+// export default Relay.createContainer(TodoListItem, {
+//   fragments: {
+//     todo: () => Relay.QL`
+//       fragment on TodoListItem {
+//         completed
+//         id
+//         text
+//         ${ChangeTodoStatusMutation.getFragment('todo')}
+//         ${RenameTodoMutation.getFragment('todo')}
+//       }
+//     `,
+//     viewer: () => Relay.QL`
+//       fragment on User {
+//         ${ChangeTodoStatusMutation.getFragment('viewer')}
+//       }
+//     `,
+//   },
+// });

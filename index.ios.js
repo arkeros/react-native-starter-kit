@@ -7,11 +7,11 @@
 import {
     AppRegistry,
 } from 'react-native';
-import App from './src/native/App';
+import Root from './src/native/Root';
 
 console.ignoredYellowBox = [
     // FIXME: https://github.com/facebook/react-native/issues/1501
     'Warning: ScrollView doesn\'t take rejection well - scrolls anyway',
 ];
 
-AppRegistry.registerComponent('ReactNativeStarterKit', () => App);
+AppRegistry.registerComponent('ReactNativeStarterKit', () => Root);

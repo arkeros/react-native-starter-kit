@@ -10,7 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import Header from './common/Header';
+import Header from './Header';
 
 const styles = StyleSheet.create({
   actionList: {

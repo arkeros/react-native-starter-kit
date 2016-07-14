@@ -15,9 +15,6 @@ export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`;
 
 export const databaseUrl = process.env.DATABASE_URL || 'sqlite:database.sqlite';
 
-// TODO should read from env in macbook and pc
-export const apiUrl = process.env.API_URL || 'http://localhost:3001';
-
 export const analytics = {
 
   // https://analytics.google.com/
