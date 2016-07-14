@@ -15,7 +15,11 @@ import bodyParser from 'body-parser';
 import expressJwt from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
+import React from 'react';
 import ReactDOM from 'react-dom/server';
+import Html from './components/Html';
+import { ErrorPage } from './routes/error/ErrorPage';
+import errorPageStyle from './routes/error/ErrorPage.css';
 import UniversalRouter from 'universal-router';
 import PrettyError from 'pretty-error';
 import passport from './core/passport';
@@ -23,7 +27,7 @@ import models from './data/models';
 import schema from './data/schema';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
-import { port, auth, analytics } from './config';
+import { port, auth } from './config';
 
 const app = express();
 
@@ -102,12 +106,7 @@ app.get('*', async (req, res, next) => {
   try {
     let css = [];
     let statusCode = 200;
-    const template = require('./views/index.jade'); // eslint-disable-line global-require
-    const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
-
-    if (process.env.NODE_ENV === 'production') {
-      data.trackingId = analytics.google.trackingId;
-    }
+    const data = { title: '', description: '', style: '', script: assets.main.js, children: '' };
 
     await UniversalRouter.resolve(routes, {
       path: req.path,
@@ -122,14 +121,16 @@ app.get('*', async (req, res, next) => {
       render(component, status = 200) {
         css = [];
         statusCode = status;
-        data.body = ReactDOM.renderToString(component);
-        data.css = css.join('');
+        data.children = ReactDOM.renderToString(component);
+        data.style = css.join('');
         return true;
       },
     });
 
+    const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
+
     res.status(statusCode);
-    res.send(template(data));
+    res.send(`<!doctype html>${html}`);
   } catch (err) {
     next(err);
   }
@@ -144,13 +145,18 @@ pe.skipPackage('express');
 
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(pe.render(err)); // eslint-disable-line no-console
-  const template = require('./views/error.jade'); // eslint-disable-line global-require
   const statusCode = err.status || 500;
+  const html = ReactDOM.renderToStaticMarkup(
+    <Html
+      title="Internal Server Error"
+      description={err.message}
+      style={errorPageStyle._getCss()} // eslint-disable-line no-underscore-dangle
+    >
+      {ReactDOM.renderToString(<ErrorPage error={err} />)}
+    </Html>
+  );
   res.status(statusCode);
-  res.send(template({
-    message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
-  }));
+  res.send(`<!doctype html>${html}`);
 });
 
 //
