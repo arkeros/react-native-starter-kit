@@ -103,9 +103,7 @@ class TodoListItem extends Component {
 
   handleTextInputSave(text) {
     this.setEditMode(false);
-    this.props.relay.commitUpdate(
-      new RenameTodoMutation({ todo: this.props.todo, text })
-    );
+    this.props.renameHandler({ todo: this.props.todo, text });
   }
 
   renderCompleteCheckbox() {

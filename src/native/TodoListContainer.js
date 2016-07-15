@@ -10,7 +10,7 @@ import {
 import { container } from 'adrenaline';
 
 // import AddTodoMutation from './mutations/AddTodoMutation';
-import removeTodo from './mutations/removeTodo';
+import { removeTodo, renameTodo } from './mutations/todo';
 import List from './common/List';
 import TodoListItem from './TodoListItem';
 
@@ -28,6 +28,7 @@ class TodoListContainer extends Component {
     super(props, context);
     this.renderItem = this.renderItem.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+    this.renameTodo = this.renameTodo.bind(this);
   }
 
   removeTodo(todo) {
@@ -37,11 +38,19 @@ class TodoListContainer extends Component {
     });
   }
 
+  renameTodo({ todo, text }) {
+    this.props.mutate({
+      mutation: renameTodo,
+      variables: { id: todo.id, text },
+    });
+  }
+
   renderItem(itemEdge) {
     const destroyHandler = () => this.removeTodo(itemEdge.node);
     return (
       <TodoListItem
         onDestroy={destroyHandler}
+        renameHandler={this.renameTodo}
         todo={itemEdge.node}
       />
     );
