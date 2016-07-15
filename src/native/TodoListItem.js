@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
 class TodoListItem extends Component {
   static propTypes = {
     onDestroy: PropTypes.func.isRequired,
+    changeStatusHandler: PropTypes.func.isRequired,
+    renameHandler: PropTypes.func.isRequired,
     style: View.propTypes.style,
     todo: PropTypes.shape({
       completed: PropTypes.bool.isRequired,

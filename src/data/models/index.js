@@ -16,7 +16,7 @@ import UserClaim from './UserClaim';
 import UserProfile from './UserProfile';
 
 Group.hasMany(Todo, { as: 'todos' });
-//TodoListItem.belongsTo(Group, { as: 'group' })
+// TodoListItem.belongsTo(Group, { as: 'group' })
 
 User.hasMany(Todo, { as: 'todos' });
 

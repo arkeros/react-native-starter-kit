@@ -1,5 +1,4 @@
 import React, {
-  Component,
   PropTypes,
 } from 'react';
 import {
@@ -42,25 +41,23 @@ const styles = StyleSheet.create({
   },
 });
 
-class Group extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    items: PropTypes.number.isRequired,
-    color: PropTypes.string, // TODO default and check proptype?
-  };
 
-  render() {
-    const { title, items, color: backgroundColor } = this.props;
-    return (
-      <TouchableHighlight style={styles.wrapper} onPress={this.props.onPress}>
-        <View style={styles.container}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.items}>{items} ITEMS</Text>
-          <View style={[styles.category, { backgroundColor }]} />
-        </View>
-      </TouchableHighlight>
-    );
-  }
+function Group({ title, items, color: backgroundColor, onPress }) {
+  return (
+    <TouchableHighlight style={styles.wrapper} onPress={onPress}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.items}>{items} ITEMS</Text>
+        <View style={[styles.category, { backgroundColor }]} />
+      </View>
+    </TouchableHighlight>
+  );
 }
+Group.propTypes = {
+  title: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  items: PropTypes.number.isRequired,
+  color: PropTypes.string, // TODO default and check proptype?
+};
 
 export default Group;

@@ -27,7 +27,7 @@ async function _logInWithPassword(username, password) {
     usernameOrEmail: username,
     password,
   });
-  
+
   // const user = await Parse.User.currentAsync();
   // user.set('facebook_id', profile.id);
   // user.set('name', profile.name);
@@ -64,16 +64,10 @@ function logInWithPassword(username, password) {
 }
 
 function logOut() {
-  return (dispatch) => {
-    // Parse.User.logOut();
-    // FacebookSDK.logout();
-    // updateInstallation({user: null, channels: []});
-
-    // TODO: Make sure reducers clear their state
-    return dispatch({
-      type: 'LOGGED_OUT',
-    });
-  };
+  // TODO: Make sure reducers clear their state
+  return (dispatch) => dispatch({
+    type: 'LOGGED_OUT',
+  });
 }
 
 export default {

@@ -58,22 +58,22 @@ class List extends Component {
   }
 
   handleTextInputSave(text) {
-    this.props.relay.commitUpdate(
-      new AddTodoMutation({ text, viewer: this.props.viewer })
-    );
+    // this.props.relay.commitUpdate(
+    //   new AddTodoMutation({ text, viewer: this.props.viewer })
+    // );
   }
 
   handleMarkAllPress() {
     const numTodos = this.props.viewer.totalCount;
     const numCompletedTodos = this.props.viewer.completedCount;
     const completed = numTodos !== numCompletedTodos;
-    this.props.relay.commitUpdate(
-      new MarkAllTodosMutation({
-        completed,
-        todos: this.props.viewer.todos,
-        viewer: this.props.viewer,
-      })
-    );
+    // this.props.relay.commitUpdate(
+    //   new MarkAllTodosMutation({
+    //     completed,
+    //     todos: this.props.viewer.todos,
+    //     viewer: this.props.viewer,
+    //   })
+    // );
   }
 
   renderItem(itemEdge) {

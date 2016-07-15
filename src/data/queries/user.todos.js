@@ -20,8 +20,8 @@ const userTodos = {
   },
   async resolve({ id: UserId }, { group: groupName, ...args }) {
     // TODO optimize queries... maybe use JOIN
-    const group = await Group.findOne({ where: { name: groupName }});
-    console.log(groupName);
+    const group = await Group.findOne({ where: { name: groupName } });
+
     return connectionFromPromisedArray(
       Todo.findAll({
         where: { UserId, GroupId: group.id },
