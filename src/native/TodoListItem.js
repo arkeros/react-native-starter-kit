@@ -50,11 +50,10 @@ const styles = StyleSheet.create({
   },
 });
 
-class Todo extends Component {
+class TodoListItem extends Component {
   static propTypes = {
     onDestroy: PropTypes.func.isRequired,
     style: View.propTypes.style,
-    viewer: PropTypes.object.isRequired,
     todo: PropTypes.shape({
       completed: PropTypes.bool.isRequired,
       text: PropTypes.string.isRequired,
@@ -167,23 +166,4 @@ export default presenter({
       }
     `,
   },
-})(Todo);
-
-// export default Relay.createContainer(TodoListItem, {
-//   fragments: {
-//     todo: () => Relay.QL`
-//       fragment on TodoListItem {
-//         completed
-//         id
-//         text
-//         ${ChangeTodoStatusMutation.getFragment('todo')}
-//         ${RenameTodoMutation.getFragment('todo')}
-//       }
-//     `,
-//     viewer: () => Relay.QL`
-//       fragment on User {
-//         ${ChangeTodoStatusMutation.getFragment('viewer')}
-//       }
-//     `,
-//   },
-// });
+})(TodoListItem);

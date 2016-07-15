@@ -41,7 +41,6 @@ class List extends Component {
     this.handleMarkAllPress = this.handleMarkAllPress.bind(this);
     this.handleSwipeInactive = this.handleSwipeInactive.bind(this);
     this.handleTextInputSave = this.handleTextInputSave.bind(this);
-    this.handleTodoDestroy = this.handleTodoDestroy.bind(this);
     this.renderItem = this.renderItem.bind(this);
   }
 
@@ -64,15 +63,6 @@ class List extends Component {
     );
   }
 
-  handleTodoDestroy(todo) {
-    this.props.relay.commitUpdate(
-      new RemoveTodoMutation({
-        todo,
-        viewer: this.props.viewer,
-      })
-    );
-  }
-
   handleMarkAllPress() {
     const numTodos = this.props.viewer.totalCount;
     const numCompletedTodos = this.props.viewer.completedCount;
@@ -87,7 +77,7 @@ class List extends Component {
   }
 
   renderItem(itemEdge) {
-    const destroyHandler = this.handleTodoDestroy.bind(null, itemEdge.node);
+    const destroyHandler = this.props.destroyHandler.bind(null, itemEdge.node);
     return (
       <Swipeout
         key={itemEdge.node.id}

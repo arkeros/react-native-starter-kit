@@ -9,42 +9,41 @@ import {
 } from 'react-native';
 import { container } from 'adrenaline';
 
-import AddTodoMutation from './mutations/AddTodoMutation';
-import RemoveTodoMutation from './mutations/RemoveTodoMutation';
+// import AddTodoMutation from './mutations/AddTodoMutation';
+import removeTodo from './mutations/removeTodo';
 import List from './common/List';
 import TodoListItem from './TodoListItem';
 
 
 class TodoListContainer extends Component {
   static propTypes = {
+    viewer: PropTypes.object,  // TODO shape
+    isFetching: PropTypes.bool.isRequired,
     group: PropTypes.string.isRequired,
     style: View.propTypes.style,
+    mutate: PropTypes.func.isRequired,
   };
 
   constructor(props, context) {
     super(props, context);
-    this.handleSwipeInactive = this.handleSwipeInactive.bind(this);
-    this.handleTextInputSave = this.handleTextInputSave.bind(this);
-    this.handleTodoDestroy = this.handleTodoDestroy.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
   }
 
-  handleSwipeInactive(swipeInactive) {
-    this.setState({ listScrollEnabled: swipeInactive });
+  removeTodo(todo) {
+    this.props.mutate({
+      mutation: removeTodo,
+      variables: { id: todo.id },
+    });
   }
 
-  handleTextInputSave(text) {
-    this.props.relay.commitUpdate(
-      new AddTodoMutation({ text, viewer: this.props.viewer })
-    );
-  }
-
-  handleTodoDestroy(todo) {
-    this.props.relay.commitUpdate(
-      new RemoveTodoMutation({
-        todo,
-        viewer: this.props.viewer,
-      })
+  renderItem(itemEdge) {
+    const destroyHandler = () => this.removeTodo(itemEdge.node);
+    return (
+      <TodoListItem
+        onDestroy={destroyHandler}
+        todo={itemEdge.node}
+      />
     );
   }
 
@@ -61,17 +60,7 @@ class TodoListContainer extends Component {
         title={group}
         items={viewer.todos}
         renderItem={this.renderItem}
-      />
-    );
-  }
-
-  renderItem(itemEdge) {
-    const destroyHandler = this.handleTodoDestroy.bind(null, itemEdge.node);
-    return (
-      <TodoListItem
-        onDestroy={destroyHandler}
-        todo={itemEdge.node}
-        viewer={this.props.viewer}
+        destroyHandler={this.removeTodo}
       />
     );
   }
