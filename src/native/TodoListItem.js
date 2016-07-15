@@ -79,13 +79,7 @@ class TodoListItem extends Component {
 
   handleCompletePress() {
     const completed = !this.props.todo.completed;
-    this.props.relay.commitUpdate(
-      new ChangeTodoStatusMutation({
-        completed,
-        todo: this.props.todo,
-        viewer: this.props.viewer,
-      })
-    );
+    this.props.changeStatusHandler({ todo: this.props.todo, completed });
   }
 
   handleLabelPress() {

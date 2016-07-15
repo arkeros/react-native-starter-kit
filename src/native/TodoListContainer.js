@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import { container } from 'adrenaline';
 
-// import AddTodoMutation from './mutations/AddTodoMutation';
-import { removeTodo, renameTodo } from './mutations/todo';
+import { changeTodoStatus, removeTodo, renameTodo } from './mutations/todo';
 import List from './common/List';
 import TodoListItem from './TodoListItem';
 
@@ -26,9 +25,17 @@ class TodoListContainer extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.renderItem = this.renderItem.bind(this);
+    this.changeTodoStatus = this.changeTodoStatus.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.renameTodo = this.renameTodo.bind(this);
+    this.renderItem = this.renderItem.bind(this);
+  }
+
+  changeTodoStatus({ todo, completed }) {
+    this.props.mutate({
+      mutation: changeTodoStatus,
+      variables: { id: todo.id, completed },
+    });
   }
 
   removeTodo(todo) {
@@ -49,6 +56,7 @@ class TodoListContainer extends Component {
     const destroyHandler = () => this.removeTodo(itemEdge.node);
     return (
       <TodoListItem
+        changeStatusHandler={this.changeTodoStatus}
         onDestroy={destroyHandler}
         renameHandler={this.renameTodo}
         todo={itemEdge.node}

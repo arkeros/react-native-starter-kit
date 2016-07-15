@@ -10,6 +10,16 @@ export const addTodo = `
   }
 `;
 
+export const changeTodoStatus = `
+  mutation ($id: ID!, $completed: Boolean!) {
+    changeTodoStatus(input: {id:$id, completed:$completed, clientMutationId:"pepe"}) {
+      todo {
+        completed,
+      }
+    }
+  }
+`;
+
 export const removeTodo = `
   mutation ($id: ID!) {
     removeTodo(input: {id:$id, clientMutationId:"pepe"}) {
