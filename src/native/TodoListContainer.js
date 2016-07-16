@@ -3,15 +3,30 @@ import React, {
   PropTypes,
 } from 'react';
 import {
-  View,
+  StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import { container } from 'adrenaline';
 
 import { changeTodoStatus, removeTodo, renameTodo } from './mutations/todo';
+import Header from './common/Header';
 import List from './common/List';
 import TodoListItem from './TodoListItem';
 
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 2,
+    backgroundColor: 'white',
+  },
+
+  list: {
+    flex: 3,
+  },
+
+});
 
 class TodoListContainer extends Component {
   static propTypes = {
@@ -72,12 +87,18 @@ class TodoListContainer extends Component {
     }
 
     return (
-      <List
-        title={group}
-        items={viewer.todos}
-        renderItem={this.renderItem}
-        destroyHandler={this.removeTodo}
-      />
+      <View style={styles.container}>
+        <Header
+          title={group}
+          background={require('./common/List/background.jpg')}
+        />
+        <List
+          style={styles.list}
+          items={viewer.todos}
+          renderItem={this.renderItem}
+          destroyHandler={this.removeTodo}
+        />
+      </View>
     );
   }
 }

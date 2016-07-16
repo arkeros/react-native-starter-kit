@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 
+import Colors from '../Colors';
 import Header from '../Header';
 import Group from './Group';
 
@@ -29,6 +30,17 @@ const styles = StyleSheet.create({
   },
 });
 
+// TODO get from ddbb
+const groups = [
+  { title: 'Shop', items: 25 },
+  { title: 'Work', items: 12 },
+  { title: 'Health', items: 3 },
+  { title: 'Travel', items: 8 },
+  { title: 'Bills', items: 16 },
+  { title: 'Auto', items: 14 },
+];
+
+
 class Groups extends Component {
   static propTypes = {
     viewer: PropTypes.object,
@@ -47,6 +59,29 @@ class Groups extends Component {
   }
 
   render() {
+    const content = [0, 2, 4].map(i => {
+      const first = groups[i];
+      const second = groups[i + 1];
+      return (
+        <View key={`row_${i}`} style={styles.row}>
+          <Group
+            style={styles.column}
+            onPress={() => this.openList(first.title)}
+            title={first.title}
+            items={first.items}
+            color={Colors.colorForTopic(6, i)}
+          />
+          <Group
+            style={styles.column}
+            onPress={() => this.openList(second.title)}
+            title={second.title}
+            items={second.items}
+            color={Colors.colorForTopic(6, i + 1)}
+          />
+        </View>
+      );
+    });
+
     return (
       <View style={styles.container}>
         <Header
@@ -54,18 +89,7 @@ class Groups extends Component {
           background={require('./background.jpg')}
         />
         <View style={styles.grid}>
-          <View style={styles.row}>
-            <Group style={styles.column} onPress={() => this.openList('Shop')} title="Shop" items={25} color="#50d2c2" />
-            <Group style={styles.column} onPress={() => this.openList('Work')} title="Work" items={12} color="#6563a4" />
-          </View>
-          <View style={styles.row}>
-            <Group style={styles.column} onPress={() => this.openList('Health')} title="Health" items={3} color="#8c88ff" />
-            <Group style={styles.column} onPress={() => this.openList('Travel')} title="Travel" items={8} color="#fcab53" />
-          </View>
-          <View style={styles.row}>
-            <Group style={styles.column} onPress={() => this.openList('Bills')} title="Bills" items={16} color="#d667cd" />
-            <Group style={styles.column} onPress={() => this.openList('Auto')} title="Auto" items={14} color="#ff3366" />
-          </View>
+          {content}
         </View>
       </View>
     );

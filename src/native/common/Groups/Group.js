@@ -3,10 +3,11 @@ import React, {
 } from 'react';
 import {
   StyleSheet,
-  Text,
   TouchableHighlight,
   View,
 } from 'react-native';
+
+import { Text } from '../Text';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -21,16 +22,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: '#1d1d26',
-    fontFamily: 'Avenir',
     fontSize: 26,
     textAlign: 'center',
     marginBottom: 5,
   },
   items: {
-    color: '#1d1d26',
     fontSize: 0.44 * 26,
-    fontFamily: 'Avenir',
     textAlign: 'center',
     opacity: 0.5,
   },

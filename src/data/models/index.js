@@ -71,6 +71,19 @@ function sync(...args) {
 
     work.createTodo({ text: 'Hammer', UserId });
     work.createTodo({ text: 'Wood', UserId });
+
+    Group.create({
+      name: 'Health',
+    });
+    Group.create({
+      name: 'Travel',
+    });
+    Group.create({
+      name: 'Bills',
+    });
+    Group.create({
+      name: 'Auto',
+    });
   });
 }
 

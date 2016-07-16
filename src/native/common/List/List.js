@@ -9,13 +9,12 @@ import {
 } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 
-import Header from '../Header';
-
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-    backgroundColor: 'white',
+
+  separator: {
+    // flex: 2,
+    // backgroundColor: 'white',
   },
 });
 
@@ -26,7 +25,11 @@ const itemsDataSource = new ListView.DataSource({
 class List extends Component {
   static propTypes = {
     // TODO items: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    items: PropTypes.shape({
+      edges: PropTypes.array,
+    }),
+    destroyHandler: PropTypes.func.isRequired,
+    renderItem: PropTypes.func.isRequired,
     style: View.propTypes.style,
   };
 
@@ -64,9 +67,9 @@ class List extends Component {
   }
 
   handleMarkAllPress() {
-    const numTodos = this.props.viewer.totalCount;
-    const numCompletedTodos = this.props.viewer.completedCount;
-    const completed = numTodos !== numCompletedTodos;
+    // const numTodos = this.props.viewer.totalCount;
+    // const numCompletedTodos = this.props.viewer.completedCount;
+    // const completed = numTodos !== numCompletedTodos;
     // this.props.relay.commitUpdate(
     //   new MarkAllTodosMutation({
     //     completed,
@@ -99,20 +102,14 @@ class List extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Header
-          title={this.props.title}
-          background={require('./background.jpg')}
-        />
-        <ListView
-          style={{ flex: 3 }}
-          dataSource={this.state.itemsDataSource}
-          enableEmptySections
-          initialListSize={this.state.initialListSize}
-          renderRow={this.renderItem}
-          renderSeparator={this.renderSeparator}
-        />
-      </View>
+      <ListView
+        style={this.props.style}
+        dataSource={this.state.itemsDataSource}
+        enableEmptySections
+        initialListSize={this.state.initialListSize}
+        renderRow={this.renderItem}
+        renderSeparator={this.renderSeparator}
+      />
     );
   }
 }

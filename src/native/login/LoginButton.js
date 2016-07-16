@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import {
   Alert,
-  StyleSheet,
 } from 'react-native';
 
 import Button from '../common/Button';
@@ -13,15 +12,7 @@ import { logInWithPassword } from '../actions';
 import { connect } from 'react-redux';
 
 
-const styles = StyleSheet.create({
-  button: {
-    alignSelf: 'center',
-    width: 270,
-  },
-});
-
-
-async function timeout(ms: number): Promise {
+async function timeout(ms) {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('Timed out')), ms);
   });
@@ -32,6 +23,7 @@ class LoginButton extends Component {
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     onLoggedIn: PropTypes.func,
+    style: Button.propTypes.style,
   };
 
   constructor() {
@@ -55,7 +47,7 @@ class LoginButton extends Component {
       const message = e.message || e;
       if (message !== 'Timed out' && message !== 'Canceled by user') {
         Alert.alert(message);
-        console.warn(e);
+        // TODO console.warn(e);
       }
       return;
     } finally {
@@ -71,7 +63,7 @@ class LoginButton extends Component {
     if (this.state.isLoading) {
       return (
         <Button
-          style={[styles.button, style]}
+          style={style}
           caption="Please wait..."
           onPress={() => {}}
         />
@@ -80,7 +72,7 @@ class LoginButton extends Component {
 
     return (
       <Button
-        style={[styles.button, style]}
+        style={style}
         caption="Sign in"
         onPress={this.logIn}
       />

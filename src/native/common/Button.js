@@ -3,9 +3,11 @@ import React, {
 } from 'react';
 import {
   StyleSheet,
-  Text,
   TouchableHighlight,
+  View,
 } from 'react-native';
+
+import { Text } from './Text';
 
 
 const styles = StyleSheet.create({
@@ -21,16 +23,19 @@ const styles = StyleSheet.create({
   },
 });
 
-function Button({ onPress, caption }) {
+function Button({ onPress, caption, style }) {
   return (
-    <TouchableHighlight style={styles.container} onPress={onPress}>
-      <Text style={styles.caption}>{caption}</Text>
+    <TouchableHighlight style={[styles.container, style]} onPress={onPress}>
+      <View>
+        <Text style={styles.caption}>{caption}</Text>
+      </View>
     </TouchableHighlight>
   );
 }
 Button.propTypes = {
   caption: PropTypes.string.isRequired,
   onPress: PropTypes.func,
+  style: TouchableHighlight.propTypes.style,
 };
 
 export default Button;

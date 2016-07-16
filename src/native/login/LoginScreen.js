@@ -5,10 +5,11 @@ import {
   Image,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   View,
 } from 'react-native';
+
+import { Text } from '../common/Text';
 import LoginButton from './LoginButton';
 
 const styles = StyleSheet.create({

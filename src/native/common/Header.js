@@ -4,8 +4,9 @@ import React, {
 import {
   Image,
   StyleSheet,
-  Text,
 } from 'react-native';
+
+import { Heading1 } from './Text';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,19 +17,12 @@ const styles = StyleSheet.create({
     height: 40,
     paddingLeft: 30,
   },
-  title: {
-    color: 'white',
-    fontFamily: 'Avenir Light',
-    fontSize: 38,
-    fontWeight: '200',
-    backgroundColor: 'transparent',
-  },
 });
 
 function Header({ title, background }) {
   return (
     <Image style={styles.container} source={background}>
-      <Text style={styles.title}>{title}</Text>
+      <Heading1>{title}</Heading1>
     </Image>
   );
 }
