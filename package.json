@@ -89,7 +89,7 @@
     "file-loader": "^0.8.5",
     "gaze": "^1.1.0",
     "git-repository": "^0.1.4",
-    "glob": "^7.0.3",
+    "glob": "^7.0.5",
     "json-loader": "^0.5.4",
     "mkdirp": "^0.5.1",
     "mocha": "^2.5.3",
