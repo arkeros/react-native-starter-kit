@@ -92,7 +92,7 @@
     "glob": "^7.0.3",
     "json-loader": "^0.5.4",
     "mkdirp": "^0.5.1",
-    "mocha": "^2.5.3",
+    "mocha": "^3.0.0",
     "ncp": "^2.0.0",
     "pixrem": "^3.0.1",
     "pleeease-filters": "^3.0.0",
