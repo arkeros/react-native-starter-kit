@@ -44,7 +44,7 @@
     "react-relay": "0.9.1",
     "redux": "3.5.2",
     "redux-thunk": "2.1.0",
-    "pg": "6.0.3",
+    "pg": "6.0.4",
     "pg-hstore": "2.3.2",
     "scrypt": "6.0.3",
     "sequelize": "3.23.6",
