@@ -21,7 +21,7 @@
     "express-graphql": "0.5.3",
     "express-jwt": "3.4.0",
     "fastclick": "1.0.6",
-    "fbjs": "0.8.3",
+    "fbjs": "0.8.4",
     "front-matter": "2.1.0",
     "graphiql": "0.7.4",
     "graphql": "0.6.2",
