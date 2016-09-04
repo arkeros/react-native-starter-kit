@@ -42,7 +42,7 @@
     "react-native-swipeout": "git+https://github.com/magrinj/react-native-swipeout#403d973504b58ede25c137fb31b0eff7e03b0a66",
     "react-redux": "4.4.5",
     "react-relay": "0.9.1",
-    "redux": "3.5.2",
+    "redux": "3.6.0",
     "redux-thunk": "2.1.0",
     "pg": "6.0.3",
     "pg-hstore": "2.3.2",
