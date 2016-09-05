@@ -76,7 +76,7 @@
     "babel-types": "^6.11.1",
     "browser-sync": "^2.12.8",
     "chai": "^3.5.0",
-    "css-loader": "^0.23.1",
+    "css-loader": "^0.25.0",
     "del": "^2.2.0",
     "enzyme": "^2.3.0",
     "eslint": "^2.13.1",
