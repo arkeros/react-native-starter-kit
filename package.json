@@ -16,7 +16,7 @@
     "classnames": "2.2.5",
     "cookie-parser": "1.4.3",
     "core-js": "2.4.0",
-    "eventemitter3": "1.2.0",
+    "eventemitter3": "2.0.1",
     "express": "4.14.0",
     "express-graphql": "0.5.3",
     "express-jwt": "3.4.0",
