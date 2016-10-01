@@ -24,9 +24,7 @@ html {
 body {
   display: table-cell;
   vertical-align: middle;
-  /* stylelint-disable */
-  margin: 2em auto;
-  /* stylelint-enable */
+  padding: 2em;
 }
 
 h1 {
@@ -46,7 +44,6 @@ pre {
 }
 
 @media only screen and (max-width: 280px) {
-
   body,
   p {
     width: 95%;
@@ -56,5 +53,4 @@ pre {
     font-size: 1.5em;
     margin: 0 0 0.3em;
   }
-
 }

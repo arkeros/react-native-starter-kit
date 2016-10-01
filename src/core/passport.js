@@ -116,7 +116,7 @@ passport.use(new FacebookStrategy({
         } else {
           user = await User.create({
             email: profile._json.email,
-            emailVerified: true,
+            emailConfirmed: true,
             logins: [
               { name: loginName, key: profile.id },
             ],
