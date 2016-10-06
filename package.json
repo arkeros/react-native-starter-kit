@@ -54,7 +54,7 @@
     "scrypt": "6.0.3",
     "sequelize": "3.23.6",
     "source-map-support": "0.4.1",
-    "sqlite3": "3.1.4",
+    "sqlite3": "3.1.6",
     "universal-router": "1.2.2",
     "whatwg-fetch": "1.0.0"
   },
