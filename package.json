@@ -40,7 +40,7 @@
     "sequelize": "3.24.3",
     "source-map-support": "0.4.2",
     "passport-local": "1.0.0",
-    "pretty-error": "2.0.0",
+    "pretty-error": "2.0.1",
     "react": "15.2.0",
     "react-dom": "15.2.0",
     "react-native": "0.30.0",
