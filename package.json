@@ -7,7 +7,7 @@
     "npm": ">=3.3 <4"
   },
   "dependencies": {
-    "adrenaline": "1.0.1",
+    "adrenaline": "1.0.2",
     "babel-polyfill": "6.13.0",
     "babel-relay-plugin": "0.9.1",
     "babel-runtime": "6.11.6",
