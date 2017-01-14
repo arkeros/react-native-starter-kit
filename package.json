@@ -35,7 +35,7 @@
     "passport-facebook": "2.1.1",
     "passport-local": "1.0.0",
     "pretty-error": "2.0.1",
-    "query-string": "4.2.3",
+    "query-string": "4.3.1",
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "react-native": "0.35.0",
