@@ -120,7 +120,7 @@
     "stylelint-config-standard": "^13.0.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
-    "webpack-hot-middleware": "^2.12.2",
+    "webpack-hot-middleware": "^2.16.0",
     "webpack-middleware": "^1.5.1"
   },
   "eslintConfig": {
