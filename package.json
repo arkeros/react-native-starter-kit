@@ -61,7 +61,7 @@
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
     "babel-plugin-react-transform": "^2.0.2",
-    "babel-plugin-rewire": "^1.0.0",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-react-constant-elements": "^6.9.1",
     "babel-plugin-transform-react-inline-elements": "^6.8.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.9",
