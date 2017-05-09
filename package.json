@@ -95,7 +95,7 @@
     "mocha": "^3.0.2",
     "ncp": "^2.0.0",
     "pixrem": "^3.0.2",
-    "pleeease-filters": "^3.0.0",
+    "pleeease-filters": "^4.0.0",
     "postcss": "^5.2.5",
     "postcss-calc": "^5.3.1",
     "postcss-color-function": "^2.0.1",
