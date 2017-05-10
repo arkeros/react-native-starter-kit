@@ -50,7 +50,7 @@
     "pg-hstore": "2.3.2",
     "scrypt": "6.0.3",
     "sqlite3": "3.1.4",
-    "universal-router": "1.2.2",
+    "universal-router": "3.2.0",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
