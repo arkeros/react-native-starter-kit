@@ -109,7 +109,7 @@
     "postcss-nesting": "^2.3.1",
     "postcss-pseudoelements": "^3.0.0",
     "postcss-selector-matches": "^2.0.5",
-    "postcss-selector-not": "^2.0.0",
+    "postcss-selector-not": "^3.0.0",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "15.3.2",
     "react-transform-catch-errors": "^1.0.2",
