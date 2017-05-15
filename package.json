@@ -101,7 +101,7 @@
     "postcss-color-function": "^2.0.1",
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.1",
-    "postcss-custom-selectors": "^3.0.0",
+    "postcss-custom-selectors": "^4.0.1",
     "postcss-flexbugs-fixes": "^2.0.0",
     "postcss-import": "^8.1.2",
     "postcss-loader": "^0.13.0",
