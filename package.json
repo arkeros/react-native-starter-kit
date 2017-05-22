@@ -106,7 +106,7 @@
     "postcss-import": "^8.1.2",
     "postcss-loader": "^0.13.0",
     "postcss-media-minmax": "^2.1.2",
-    "postcss-nesting": "^2.3.1",
+    "postcss-nesting": "^4.0.1",
     "postcss-pseudoelements": "^3.0.0",
     "postcss-selector-matches": "^2.0.5",
     "postcss-selector-not": "^2.0.0",
