@@ -75,7 +75,7 @@
     "babel-template": "^6.15.0",
     "babel-types": "^6.15.0",
     "browser-sync": "^2.16.0",
-    "chai": "^3.5.0",
+    "chai": "^4.0.1",
     "css-loader": "^0.25.0",
     "del": "^2.2.2",
     "enzyme": "^2.4.1",
