@@ -1,5 +1,7 @@
 # React Native Starter Kit = React Native + React Starter Kit
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/arkeros/react-native-starter-kit.svg)](https://greenkeeper.io/)
+
 ### Install
 ```
 npm install
